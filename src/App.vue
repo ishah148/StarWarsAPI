@@ -1,9 +1,30 @@
 <template>
-  <router-view/>
+  <HeaderMain>
+    <nav>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </nav>
+  </HeaderMain>
+  <router-view />
 </template>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+import HeaderMain from '@/components/HeaderMain.vue'
+
+export default defineComponent({
+  name: 'HomeView',
+  components: {
+    HeaderMain
+  },
+  mounted () {
+    console.log('Main is mounted')
+  }
+})
+</script>
+
 <style lang="scss">
-*{
+* {
   box-sizing: border-box;
 }
 #app {

@@ -5,9 +5,10 @@
   <div class="container">
     <div class="item">
       <div class="image-container">
-        <img src="./img/characters/20.jpg" alt="" />
+        <img src="./img/peoples/20.jpg" alt="" />
       </div>
-      <p class="link">Peoples</p>
+      <!-- <p class="link">Peoples</p> -->
+      <router-link class="link" to="/peoples">Peoples</router-link>
     </div>
     <div class="item">
       <div class="image-container">
