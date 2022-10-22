@@ -22,15 +22,30 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
-    path: '/peoples',
+    path: '/peoples/:id',
+    name: 'peoples',
+    component: PeopleList
+  },
+  {
+    path: '/peoples/:page',
     name: 'peoples',
     component: PeopleList
   }
+  // {
+  //   path: '/peoples/:page',
+  //   name: 'peoples',
+  //   component: PeopleList
+  // },
+  // {
+  //   path: '/peoples/:id',
+  //   name: 'peoples',
+  //   component: PeopleList
+  // }
 ]
 
 const router = createRouter({
-  // history: createWebHashHistory(process.env.BASE_URL),
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(process.env.BASE_URL),
+  // history: createWebHistory(process.env.BASE_URL),
   routes
 })
 

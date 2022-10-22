@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 export const API_URL = 'https://swapi.dev/api/'
 
 export const apiSwapiInstance = axios.create({
@@ -9,3 +9,11 @@ export const apiSwapiInstance = axios.create({
     'Content-Type': 'application/json'
   }
 })
+apiSwapiInstance.interceptors.response.use(
+  (config) => {
+    return config
+  },
+  async (error: AxiosError) => {
+    return error.response
+  }
+)

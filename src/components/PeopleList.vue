@@ -1,7 +1,12 @@
 /* eslint-disable camelcase */
 <template>
-  <p>people list</p>
-  <p>page:{{ page }}</p>
+  <SearchBar />
+  <p>Peoples</p>
+  <div class="pagination">
+    <button @click="nextPage">Next</button>
+    <p>{{ page }}</p>
+    <button @click="prevPage">Prev</button>
+  </div>
   <div class="container">
     <div class="loading" v-if="isLoading">loading...</div>
     <div class="items" v-if="!isLoading && !isError">
@@ -10,31 +15,23 @@
           <div class="item-image">
             <MyImage :msg="item.url" />
           </div>
-          <p>
-            {{
-              `assets/img/peoples/${item.url.split('/').slice(-2, -1)[0]}.jpg`
-            }}
-          </p>
           <p class="item-name">{{ item.name }}</p>
-          <p class="item-year">{{ item.homeworld }}</p>
+          <p class="item-year">{{ item.birth_year }}</p>
         </div>
       </div>
     </div>
     <div class="error" v-else-if="isError">Something was wrong :(</div>
   </div>
-  <div class="pagination">
-    <button @click="nextPage">Next</button>
-    <p>{{ page }}</p>
-    <button @click="prevPage">Prev</button>
-  </div>
+
   <!-- <p>{{ data }}</p> -->
 </template>
 <script lang="ts">
 import { People } from '@/models/SwapApi/people'
 import { SwapiApi } from '@/services/api'
 import { generate } from '@vue/compiler-core'
-import { defineComponent } from 'vue'
+import { defineComponent, nextTick } from 'vue'
 import MyImage from './MyImage.vue'
+import SearchBar from './SearchBar.vue'
 
 export default defineComponent({
   data () {
@@ -42,6 +39,7 @@ export default defineComponent({
       page: 1,
       maxPage: 5,
       data: [] as People[],
+      seachedData: [] as People[],
       isError: false,
       isLoading: false
     }
@@ -51,12 +49,14 @@ export default defineComponent({
       if (this.page < this.maxPage) {
         this.page++
         this.getData(this.page)
+        this.$router.push({ params: { page: this.page++ } })
       }
     },
     prevPage () {
       if (this.page > 1) {
         this.page--
         this.getData(this.page)
+        this.$router.push({ params: { page: this.page-- } })
       }
     },
     async getData (page: number) {
@@ -74,9 +74,33 @@ export default defineComponent({
     }
   },
   mounted () {
+    this.page = +this.$route.params.page
+    // console.log('', this.$route)
     this.getData(this.page)
   },
-  computed: {},
-  components: { MyImage }
+  watch: {
+    $route () {
+      this.page = +this.$route.params.page
+    }
+  },
+  // beforeRouteUpdate () {
+  //   console.log('beforeRouteUpdate')
+  //   this.page = +this.$route.params.page
+  //   console.log('new page =', this.page)
+  //   this.getData(this.page)
+  //   nextTick()
+  // },
+  components: { MyImage, SearchBar }
 })
 </script>
+<style lang="scss" scoped>
+.items {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+}
+</style>
