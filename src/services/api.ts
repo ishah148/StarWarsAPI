@@ -3,9 +3,9 @@ import { PeopleResponse } from '@/models/SwapApi/people'
 import { Resources } from '@/models/SwapApi/resources'
 import { apiSwapiInstance } from './axios_service'
 export class SwapiApi {
-  static async getPeoples (page: number) {
+  static async getPeoples (group: Resources, page: number) {
     const res = await apiSwapiInstance.get<PeopleResponse>(
-      `/people?page=${page}`
+      `/${group}?page=${page}`
     )
     return {
       status: res.status,

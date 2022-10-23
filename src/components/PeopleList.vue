@@ -27,6 +27,7 @@ import { SwapiApi } from '@/services/api'
 import { defineComponent } from 'vue'
 import SearchBar from './SearchBar.vue'
 import ShortDescriptionItem from './DescriptionItems/ShortDescriptionItem.vue'
+import { resources, Resources } from '@/models/SwapApi/resources'
 export default defineComponent({
   data () {
     return {
@@ -64,11 +65,17 @@ export default defineComponent({
     async getData (page: number) {
       this.isLoading = true
       this.isError = false
-      const res = await SwapiApi.getPeoples(page)
+      const group = this.$route.params.group as Resources
+      if (!resources.includes(group)) {
+        this.isError = true
+        return
+      }
+      const res = await SwapiApi.getPeoples(group, page)
       this.isLoading = false
       this.data = []
       if (res.status === 200) {
         this.data.push(...res.data.results)
+        this.maxPage = Math.ceil(res.data.count / 10)
       } else {
         this.isError = true
       }
