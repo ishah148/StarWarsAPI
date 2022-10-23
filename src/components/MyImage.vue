@@ -7,7 +7,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'MyImage',
   props: {
-    msg: String
+    url: String
   },
   data () {
     return {
@@ -16,7 +16,7 @@ export default defineComponent({
   },
   methods: {
     createSrc () {
-      return `img/peoples/${this.msg?.split('/').slice(-2, -1)[0]}.jpg`
+      return `img/peoples/${this.url?.split('/').slice(-2, -1)[0]}.jpg`
     }
   },
   mounted () {

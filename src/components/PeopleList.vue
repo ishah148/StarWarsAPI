@@ -11,27 +11,7 @@
     <div class="loading" v-if="isLoading">loading...</div>
     <div class="items" v-if="!isLoading && !isError">
       <div class="tst" v-for="item in data" :key="item.birth_year">
-        <div class="item-container">
-          <div class="item-image">
-            <MyImage :msg="item.url" />
-          </div>
-          <p class="item-name">{{ item.name }}</p>
-          <p class="item-year">{{ item.gender }}</p>
-          <button
-            class="item-button"
-            @click="
-              // $router.push({ name: 'details', params: { id: '55555555',descr:'1234' } })
-              $router.push({
-                name: 'details',
-                path:'/peoples/details/',
-                params:{item:item.name},
-                state: { data: JSON.stringify(item) }
-              })
-            "
-          >
-            Description
-          </button>
-        </div>
+        <ShortDescriptionItem :name="item.name" :info="item.gender" :url="item.url" :obj="item"/>
       </div>
     </div>
     <div class="error" v-else-if="isError">Something was wrong :(</div>
@@ -46,7 +26,7 @@ import { generate } from '@vue/compiler-core'
 import { defineComponent, nextTick } from 'vue'
 import MyImage from './MyImage.vue'
 import SearchBar from './SearchBar.vue'
-
+import ShortDescriptionItem from './swap_api_items/ShortDescriptionItem/index.vue'
 export default defineComponent({
   data () {
     return {
@@ -104,7 +84,7 @@ export default defineComponent({
       this.updatePageFromRouter()
     }
   },
-  components: { MyImage, SearchBar }
+  components: { SearchBar, ShortDescriptionItem }
 })
 </script>
 <style lang="scss" scoped>
