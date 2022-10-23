@@ -1,5 +1,5 @@
 <template>
-  <img :src="src" alt="">
+  <img :src="src" alt="" />
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
@@ -20,6 +20,9 @@ export default defineComponent({
     }
   },
   mounted () {
+    this.src = this.createSrc()
+  },
+  updated () {
     this.src = this.createSrc()
   }
 })

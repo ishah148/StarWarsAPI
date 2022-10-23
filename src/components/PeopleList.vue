@@ -16,7 +16,21 @@
             <MyImage :msg="item.url" />
           </div>
           <p class="item-name">{{ item.name }}</p>
-          <p class="item-year">{{ item.birth_year }}</p>
+          <p class="item-year">{{ item.gender }}</p>
+          <button
+            class="item-button"
+            @click="
+              // $router.push({ name: 'details', params: { id: '55555555',descr:'1234' } })
+              $router.push({
+                name: 'details',
+                path:'/peoples/details/',
+                params:{item:item.name},
+                state: { data: JSON.stringify(item) }
+              })
+            "
+          >
+            Description
+          </button>
         </div>
       </div>
     </div>
@@ -59,6 +73,14 @@ export default defineComponent({
         this.$router.push({ params: { page: this.page-- } })
       }
     },
+    updatePageFromRouter () {
+      const routerPage = +this.$route.params.page
+      if (typeof +routerPage === 'number' && !isNaN(routerPage)) {
+        this.page = +routerPage
+      } else {
+        this.page = 1
+      }
+    },
     async getData (page: number) {
       this.isLoading = true
       this.isError = false
@@ -74,22 +96,14 @@ export default defineComponent({
     }
   },
   mounted () {
-    this.page = +this.$route.params.page
-    // console.log('', this.$route)
+    this.updatePageFromRouter()
     this.getData(this.page)
   },
   watch: {
     $route () {
-      this.page = +this.$route.params.page
+      this.updatePageFromRouter()
     }
   },
-  // beforeRouteUpdate () {
-  //   console.log('beforeRouteUpdate')
-  //   this.page = +this.$route.params.page
-  //   console.log('new page =', this.page)
-  //   this.getData(this.page)
-  //   nextTick()
-  // },
   components: { MyImage, SearchBar }
 })
 </script>

@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import {
   createRouter,
   createWebHashHistory,
@@ -6,6 +8,7 @@ import {
 } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import PeopleList from '@/components/PeopleList.vue'
+import PeopleDetails from '@/components/PeopleDetails.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -15,32 +18,27 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  },
-  {
-    path: '/peoples/:id',
-    name: 'peoples',
-    component: PeopleList
   },
   {
     path: '/peoples/:page',
     name: 'peoples',
     component: PeopleList
+  },
+  {
+    path: '/people/details/:item',
+    name: 'details',
+    component: PeopleDetails
+    // props: {
+    //   props: (route) => {
+    //     console.log('entered route')
+    //     console.log(route)
+    //     return { ...route.params }
+    //   }
+    // }
   }
-  // {
-  //   path: '/peoples/:page',
-  //   name: 'peoples',
-  //   component: PeopleList
-  // },
-  // {
-  //   path: '/peoples/:id',
-  //   name: 'peoples',
-  //   component: PeopleList
-  // }
+
 ]
 
 const router = createRouter({
