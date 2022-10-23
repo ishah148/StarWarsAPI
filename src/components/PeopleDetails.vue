@@ -7,12 +7,8 @@
   <div v-if="isError">
     <ErrorSign :msg="errorMessage" />
   </div>
-  <div v-if="!isError && !isLoading">
-    <MyImage :url="data?.url" />
-    <div v-for="(item, index) in data" :key="item.toString()">
-      <p v-if="typeof item === 'string'">{{ index }} : {{ item }}</p>
-    </div>
-  </div>
+  <div v-if="!isError && !isLoading"></div>
+  <FullDescriptionItem :obj="(data as People | Films )" />
 </template>
 
 <script lang="ts">
@@ -24,7 +20,8 @@ import { SwapiApi } from '@/services/api'
 import { Resources, resources } from '@/models/SwapApi/resources'
 import LoadingSpinner from './ui/LoadingSpinner.vue'
 import ErrorSign from './ui/ErrorSign.vue'
-
+import { Films } from '@/models/SwapApi/films'
+import FullDescriptionItem from './DescriptionItems/FullDescriptionItem.vue'
 export default defineComponent({
   name: 'PeopleDetails',
   props: {
@@ -32,7 +29,7 @@ export default defineComponent({
   },
   data () {
     return {
-      data: null as People | null,
+      data: null as People | Films | null | undefined,
       isLoading: false,
       isError: false,
       errorMessage: ''
@@ -59,7 +56,7 @@ export default defineComponent({
       } else this.isError = true
     } else this.data = JSON.parse(history.state.data)
   },
-  components: { BackButton, MyImage, LoadingSpinner, ErrorSign }
+  components: { BackButton, LoadingSpinner, ErrorSign, FullDescriptionItem }
 })
 </script>
 

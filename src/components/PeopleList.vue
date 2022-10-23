@@ -20,17 +20,13 @@
     </div>
     <div class="error" v-else-if="isError">Something was wrong :(</div>
   </div>
-
-  <!-- <p>{{ data }}</p> -->
 </template>
 <script lang="ts">
 import { People } from '@/models/SwapApi/people'
 import { SwapiApi } from '@/services/api'
-import { generate } from '@vue/compiler-core'
-import { defineComponent, nextTick } from 'vue'
-import MyImage from './MyImage.vue'
+import { defineComponent } from 'vue'
 import SearchBar from './SearchBar.vue'
-import ShortDescriptionItem from './swap_api_items/ShortDescriptionItem/index.vue'
+import ShortDescriptionItem from './DescriptionItems/ShortDescriptionItem.vue'
 export default defineComponent({
   data () {
     return {

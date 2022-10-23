@@ -1,7 +1,6 @@
 <template>
   <MyImage v-if="obj?.url" :url="url" />
   <p>{{ name }}</p>
-  <p>{{ info }}</p>
   <button
     class="item-button"
     @click="
@@ -9,6 +8,7 @@
         name: 'details',
         path: `/${group}/details/`,
         params: {
+          group,
           item:
             group === 'films' ? (obj as Films)?.title : (obj as People)?.name
         },
@@ -25,23 +25,22 @@ import MyImage from '@/components/MyImage.vue'
 import { People } from '@/models/SwapApi/people'
 import { Films } from '@/models/SwapApi/films'
 import { Resources } from '@/models/SwapApi/resources'
+import { defineGroup } from '@/utils/utils'
 export default defineComponent({
   name: 'ShortDescriptionItem',
   props: {
-    // group: String as PropType<Resources>,
-    obj: Object as PropType<People | Films>
+    obj: Object as PropType<People | Films | undefined>
   },
   data () {
     return {
       name: '123',
-      info: '123',
-      group: 'people',
+      group: '',
       url: this.obj?.url
     }
   },
   methods: {
     defineName () {
-      console.log('ShortDescriptionItem', this.obj, this.group)
+      // console.log('ShortDescriptionItem', this.obj, this.group)
       this.name =
         this.group === 'films'
           ? (this.obj as Films)?.title
@@ -50,6 +49,7 @@ export default defineComponent({
   },
   mounted () {
     this.defineName()
+    this.group = defineGroup(this.$route.path)
   },
   components: { MyImage }
 })

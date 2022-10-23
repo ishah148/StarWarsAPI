@@ -27,7 +27,7 @@ const routes: Array<RouteRecordRaw> = [
     component: PeopleList
   },
   {
-    path: '/people/details/:item',
+    path: '/:group/details/:item',
     name: 'details',
     component: PeopleDetails
     // props: {
