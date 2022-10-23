@@ -9,8 +9,8 @@
   </div>
   <div v-if="!isError && !isLoading">
     <MyImage :url="data?.url" />
-    <div v-for="item in data" :key="item.toString()">
-      <p>{{ item }}</p>
+    <div v-for="(item, index) in data" :key="item.toString()">
+      <p v-if="typeof item === 'string'">{{ index }} : {{ item }}</p>
     </div>
   </div>
 </template>

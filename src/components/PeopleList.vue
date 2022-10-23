@@ -14,9 +14,6 @@
         <ShortDescriptionItem
           v-for="(item, index) in data"
           :key="item.birth_year + index"
-          :name="item.name"
-          :info="item.gender"
-          :url="item.url"
           :obj="item"
         />
       </div>

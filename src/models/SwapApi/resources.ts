@@ -6,14 +6,6 @@ export type Resources =
   | 'starships'
   | 'vehicles'
 
-// export type Resources = {
-//   films: 'films'
-//   people: 'people'
-//   planets: 'planets'
-//   species: 'species'
-//   starships: 'starships'
-//   vehicles: 'vehicles'
-// }
 export const resources = [
   'films',
   'people',
@@ -22,3 +14,11 @@ export const resources = [
   'starships',
   'vehicles'
 ]
+export const resourcesTitles = {
+  films: 'title',
+  people: 'name',
+  vehicles: 'name',
+  species: 'name',
+  planets: 'name',
+  starships: 'name'
+}
