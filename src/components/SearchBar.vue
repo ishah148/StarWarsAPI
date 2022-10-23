@@ -1,7 +1,7 @@
 <template>
   <form action=""></form>
   <input type="search" v-model="searchQuery" />
-  <button class="button-primary" @click="updateText">123</button>
+  <button class="button-primary" @click="updateText">Search </button>
   <!-- <p>{{ text }}</p>
   <p>{{ searchQuery }}</p>
   <p>{{ test2.fname }}</p> -->
@@ -33,6 +33,6 @@ export default defineComponent({
 <style scoped>
 .button-primary {
   height: 30px;
-  width: 50px;
+  width: 60px;
 }
 </style>

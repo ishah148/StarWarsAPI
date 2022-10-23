@@ -1,21 +1,21 @@
 <template>
-  <HeaderMain>
+  <HeaderBar>
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </nav>
-  </HeaderMain>
+  </HeaderBar>
   <router-view />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import HeaderMain from '@/components/HeaderMain.vue'
+import HeaderBar from '@/components/HeaderBar.vue'
 
 export default defineComponent({
   name: 'HomeView',
   components: {
-    HeaderMain
+    HeaderBar
   },
   mounted () {
     console.log('Main is mounted')
