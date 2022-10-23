@@ -5,10 +5,10 @@
   <div class="container">
     <div class="item">
       <div class="image-container">
-        <img :src="require('../assets/img/peoples/20.jpg')" alt="" />
+        <img :src="require('../assets/img/people/20.jpg')" alt="" />
       </div>
       <!-- <p class="link">Peoples</p> -->
-      <router-link class="link" to="/peoples/1">Peoples</router-link>
+      <router-link class="link" to="/people/1">Peoples</router-link>
     </div>
     <div class="item">
       <div class="image-container">

@@ -16,7 +16,11 @@ export default defineComponent({
   },
   methods: {
     createSrc () {
-      return `img/peoples/${this.url?.split('/').slice(-2, -1)[0]}.jpg`
+      console.log(
+        'fff',
+        `img/people/${this.url?.split('/').slice(-2, -1)[0]}.jpg`
+      )
+      return `img/people/${this.url?.split('/').slice(-2, -1)[0]}.jpg`
     }
   },
   mounted () {

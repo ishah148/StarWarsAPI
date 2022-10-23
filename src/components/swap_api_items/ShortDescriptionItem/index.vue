@@ -7,7 +7,7 @@
     @click="
       $router.push({
         name: 'details',
-        path: '/peoples/details/',
+        path: `/${group}/details/`,
         params: { item: obj?.name },
         state: { data: JSON.stringify(obj) }
       })
@@ -32,6 +32,7 @@ export default defineComponent({
     name: String,
     info: String,
     url: String,
+    group: String,
     obj: Object as PropType<People>
   },
   components: { MyImage }

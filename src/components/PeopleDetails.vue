@@ -8,7 +8,7 @@
     <ErrorSign :msg="errorMessage" />
   </div>
   <div v-if="!isError && !isLoading">
-    <MyImage :msg="data?.url" />
+    <MyImage :url="data?.url" />
     <div v-for="item in data" :key="item.toString()">
       <p>{{ item }}</p>
     </div>

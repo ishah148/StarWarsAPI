@@ -10,8 +10,15 @@
   <div class="container">
     <div class="loading" v-if="isLoading">loading...</div>
     <div class="items" v-if="!isLoading && !isError">
-      <div class="tst" v-for="item in data" :key="item.birth_year">
-        <ShortDescriptionItem :name="item.name" :info="item.gender" :url="item.url" :obj="item"/>
+      <div class="tst">
+        <ShortDescriptionItem
+          v-for="(item, index) in data"
+          :key="item.birth_year + index"
+          :name="item.name"
+          :info="item.gender"
+          :url="item.url"
+          :obj="item"
+        />
       </div>
     </div>
     <div class="error" v-else-if="isError">Something was wrong :(</div>
