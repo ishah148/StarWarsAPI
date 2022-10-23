@@ -1,15 +1,17 @@
 <template>
-  <MyImage :url="obj?.url" />
-  <div v-for="(item, index) in strings" :key="item">
-    <p :key="item">{{ index }} : {{ item }}</p>
-  </div>
-  <p>--------------</p>
-  <div v-for="(item, index) in urls" :key="item">
-    <p :key="item">{{ index }} : {{ item }}</p>
-  </div>
-  <p>--------------</p>
-  <div v-for="(item, index) in arrays" :key="item">
-    <p :key="item">{{ index }} : {{ item }}</p>
+  <div class="container" v-if="Object.keys(obj || {}).length">
+    <MyImage :url="obj?.url" />
+    <div v-for="(item, index) in strings" :key="item">
+      <p :key="item">{{ index }} : {{ item }}</p>
+    </div>
+    <p>--------------</p>
+    <div v-for="(item, index) in urls" :key="item">
+      <p :key="item">{{ index }} : {{ item }}</p>
+    </div>
+    <p>--------------</p>
+    <div v-for="(item, index) in arrays" :key="item">
+      <p :key="item">{{ index }} : {{ item }}</p>
+    </div>
   </div>
 
   <!-- <div v-for="(item, index) in obj" :key="item.toString()">
@@ -35,8 +37,8 @@ export default defineComponent({
   },
   methods: {
     filterData () {
-      const filteredArr = Object.entries(this.obj || {}).filter((i) =>
-        Array.isArray(i[1]) && i[1].length > 1
+      const filteredArr = Object.entries(this.obj || {}).filter(
+        (i) => Array.isArray(i[1]) && i[1].length > 1
       )
       this.arrays = Object.fromEntries(filteredArr)
       const filteredUrls = Object.entries(this.obj || {}).filter((i) => {
@@ -60,6 +62,12 @@ export default defineComponent({
   },
   mounted () {
     this.filterData()
+  },
+  updated () {
+    if (
+      !Object.keys(this.strings || {}).length ||
+      !Object.keys(this.strings || {})
+    ) { this.filterData() }
   },
   components: { MyImage }
 })
