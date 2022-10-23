@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import { PeopleResponse } from '@/models/SwapApi/people'
-import { resources } from '@/models/SwapApi/resources'
-import axios, { AxiosResponse } from 'axios'
+import { Resources } from '@/models/SwapApi/resources'
 import { apiSwapiInstance } from './axios_service'
 export class SwapiApi {
   static async getPeoples (page: number) {
@@ -14,8 +13,10 @@ export class SwapiApi {
     }
   }
 
-  static async search (group: resources, query: string) {
-    const res = await apiSwapiInstance.get<PeopleResponse>('/people?')
+  static async search (group: Resources, item: string) {
+    const res = await apiSwapiInstance.get<PeopleResponse>(
+      `${group}/?search=${item}`
+    )
     return {
       status: res.status,
       data: res.data
