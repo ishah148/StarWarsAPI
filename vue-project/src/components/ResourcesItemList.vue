@@ -5,38 +5,38 @@
   <div class="container">
     <div class="item">
       <div class="image-container">
-        <img :src="require('../assets/img/people/20.jpg')" alt="" />
+        <img :src="'img/people/20.jpg'" alt="" />
       </div>
       <!-- <p class="link">Peoples</p> -->
       <router-link class="link" to="/people/1">Peoples</router-link>
     </div>
     <div class="item">
       <div class="image-container">
-        <img :src="require('../assets/img/planets/9.jpg')" alt="" />
+        <img :src="'img/planets/9.jpg'" alt="" />
       </div>
       <p class="link">Planets</p>
     </div>
     <div class="item">
       <div class="image-container">
-        <img :src="require('../assets/img/films/1.jpg')" alt="" />
+        <img :src="'img/films/1.jpg'" alt="" />
       </div>
       <p class="link">Films</p>
     </div>
     <div class="item">
       <div class="image-container">
-        <img :src="require('../assets/img/vehicles/20.jpg')" alt="" />
+        <img :src="'img/vehicles/20.jpg'" alt="" />
       </div>
       <p class="link">Vehicles</p>
     </div>
     <div class="item">
       <div class="image-container">
-        <img :src="require('../assets/img/starships/40.jpg')" alt="" />
+        <img :src="'img/starships/40.jpg'" alt="" />
       </div>
       <p class="link">Starships</p>
     </div>
     <div class="item">
       <div class="image-container">
-        <img :src="require('../assets/img/species/79.jpg')" alt="" />
+        <img :src="'img/species/79.jpg'" alt="" />
       </div>
       <p class="link">Species</p>
     </div>
