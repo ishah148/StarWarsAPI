@@ -1,5 +1,5 @@
 <template>
-  <h2>Something was wrong "("</h2>
+  <h2>Loading....</h2>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
