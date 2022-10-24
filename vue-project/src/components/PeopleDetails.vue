@@ -1,60 +1,64 @@
 <template>
   <h2>Peopde Detatailes</h2>
   <BackButton />
-  <div v-if="!isError && isLoading">
+  <div v-if="isLoading">
     <LoadingSpinner />
   </div>
-  <div v-if="isError">
+  <div v-if="isError && !isLoading">
     <ErrorSign :msg="errorMessage" />
   </div>
   <div v-if="!isError && !isLoading"></div>
-  <FullDescriptionItem :obj="(data as People | Films )" />
+  <FullDescriptionItem v-if="data" :obj="(data as SwapApiData)" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import BackButton from './ui/BackButton.vue'
-import MyImage from './MyImage.vue'
-import { People } from '@/models/SwapApi/people'
 import { SwapiApi } from '@/services/api'
-import { Resources, resources } from '@/models/SwapApi/resources'
+import { NotFoundById, Resources, resources, SwapApiData } from '@/models/SwapApi/resources'
 import LoadingSpinner from './ui/LoadingSpinner.vue'
 import ErrorSign from './ui/ErrorSign.vue'
-import { Films } from '@/models/SwapApi/films'
 import FullDescriptionItem from './DescriptionItems/FullDescriptionItem.vue'
+import { defineId } from '@/utils/url_helper'
+import { isEmptyItem } from '@/utils/utils'
 export default defineComponent({
   name: 'PeopleDetails',
-  props: {
-    descr: String
-  },
-  data () {
+  data() {
     return {
-      data: null as People | Films | null | undefined,
+      data: null as unknown as SwapApiData | NotFoundById,
       isLoading: false,
       isError: false,
       errorMessage: ''
     }
   },
-  watch: {},
   methods: {
-    async showSearchedData (group: Resources, name: string) {
+    async showSearchedData(group: Resources) {
+      // if (!this.url) throw new Error("46: url undefind"); // delete
       this.isLoading = true
-      const res = await SwapiApi.search(group, name)
-      this.isLoading = false
-      if (res.status === 200) {
-        const data = res.data.results
-        data.length > 0 ? (this.data = data[0]) : (this.isError = true)
-        if (data.length === 0) this.errorMessage = 'Not Found'
-      } else this.isError = true
+      const id = defineId(this.$route.path as string)
+      if (!id) throw new Error("45: id undefind"); // delete
+      try {
+
+        const res = await SwapiApi.getItemById(group, id)
+        console.log('123123')
+        this.isLoading = false
+        if (res.status === 200) {
+          const data = res.data
+          isEmptyItem(data) ? (this.data = data) : this.isError = true
+          if (isEmptyItem(data)) this.errorMessage = 'Not Found'
+        } else this.isError = true
+      }catch(e){
+        console.log('',e)
+        this.isError = true
+        this.isLoading = false
+      }
     }
   },
-  mounted () {
-    if (!history.state.data) {
-      const [, group, , name] = this.$route.path.split('/')
-      if (resources.includes(group)) {
-        this.showSearchedData(group as Resources, name)
-      } else this.isError = true
-    } else this.data = JSON.parse(history.state.data)
+  mounted() {
+    const [, group, ,] = this.$route.path.split('/')
+    if (resources.includes(group)) {
+      this.showSearchedData(group as Resources,)
+    } else console.log('this.isError = true 2')
   },
   components: { BackButton, LoadingSpinner, ErrorSign, FullDescriptionItem }
 })

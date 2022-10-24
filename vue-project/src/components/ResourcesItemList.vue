@@ -57,16 +57,8 @@ export default defineComponent({
     return {}
   },
   watch: {},
-  methods: {
-    updateText () {
-      console.log('')
-    }
-  },
   components: {
     SearchBar
-  },
-  mounted () {
-    console.log('Resources is mounted')
   }
 })
 </script>

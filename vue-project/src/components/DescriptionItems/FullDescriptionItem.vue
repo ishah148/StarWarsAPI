@@ -21,12 +21,13 @@
 <script lang="ts">
 import { Films } from '@/models/SwapApi/films'
 import { People } from '@/models/SwapApi/people'
+import { SwapApiData } from '@/models/SwapApi/resources'
 import { defineComponent, PropType } from 'vue'
 import MyImage from '../MyImage.vue'
 export default defineComponent({
   name: 'FullDescriptionItem',
   props: {
-    obj: Object as PropType<People | Films>
+    obj: Object as PropType<SwapApiData>
   },
   data () {
     return {

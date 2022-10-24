@@ -16,11 +16,6 @@ export default {
     return {}
   },
   watch: {},
-  methods: {
-    updateText () {
-      console.log('')
-    }
-  }
 }
 </script>
 

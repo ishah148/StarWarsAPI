@@ -16,9 +16,6 @@ export default defineComponent({
   name: 'HomeView',
   components: {
     HeaderBar
-  },
-  mounted () {
-    console.log('Main is mounted')
   }
 })
 </script>
