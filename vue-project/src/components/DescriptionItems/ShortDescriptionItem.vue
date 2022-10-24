@@ -46,7 +46,6 @@ export default defineComponent({
   mounted() {
     this.group = defineGroup(this.$route.path);
     this.defineName();
-    console.log("ShortDescriptionItem gr na", (this.obj as Films)?.title, this.group, this.name);
   },
   components: { MyImage },
 });

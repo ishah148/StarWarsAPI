@@ -1,17 +1,16 @@
 <template>
-  <form action=""></form>
-  <input type="search" v-model="searchQuery" />
-  <button class="button-primary" @click="updateText">Search </button>
-  <!-- <p>{{ text }}</p>
-  <p>{{ searchQuery }}</p>
-  <p>{{ test2.fname }}</p> -->
+  <form @submit.prevent="log">
+    <input type="search" v-model="searchQuery" />
+    <button type="submit" class="button-primary" @click="updateText">Search</button>
+  </form>
+
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  data () {
+  data() {
     return {
       text: '',
       searchQuery: '',
@@ -23,9 +22,19 @@ export default defineComponent({
   },
   watch: {},
   methods: {
-    updateText () {
+    updateText() {
       this.test2.fname = 3
-    }
+    },
+    log() {
+      this.setRouterQuery('search', this.searchQuery)
+
+    },
+    setRouterQuery(prop: 'search' | 'page', value: string | number) {
+      const prevQuery = this.$route.query
+      // const query = { ...prevQuery, [prop]: value }
+      // this.$router.push({ query })
+      this.$router.push({path:'/people/search'})
+    },
   }
 })
 </script>

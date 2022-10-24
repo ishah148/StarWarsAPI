@@ -8,37 +8,37 @@
         <img :src="'img/people/20.jpg'" alt="" />
       </div>
       <!-- <p class="link">Peoples</p> -->
-      <router-link class="link" to="/people/1">Peoples</router-link>
+      <router-link class="link" to="/people">Peoples</router-link>
     </div>
     <div class="item">
       <div class="image-container">
         <img :src="'img/planets/9.jpg'" alt="" />
       </div>
-      <p class="link">Planets</p>
+     <router-link class="link" to="/planets">Planets</router-link>
     </div>
     <div class="item">
       <div class="image-container">
         <img :src="'img/films/1.jpg'" alt="" />
       </div>
-      <p class="link">Films</p>
+     <router-link class="link" to="/films">Films</router-link>
     </div>
     <div class="item">
       <div class="image-container">
         <img :src="'img/vehicles/20.jpg'" alt="" />
       </div>
-      <p class="link">Vehicles</p>
+     <router-link class="link" to="/vehicles">Vehicles</router-link>
     </div>
     <div class="item">
       <div class="image-container">
         <img :src="'img/starships/40.jpg'" alt="" />
       </div>
-      <p class="link">Starships</p>
+     <router-link class="link" to="/starships">Starships</router-link>
     </div>
     <div class="item">
       <div class="image-container">
         <img :src="'img/species/79.jpg'" alt="" />
       </div>
-      <p class="link">Species</p>
+     <router-link class="link" to="/species">Species</router-link>
     </div>
   </div>
   <!-- </transition> -->
