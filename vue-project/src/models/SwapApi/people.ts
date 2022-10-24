@@ -17,10 +17,3 @@ export type People = {
   edited: string
   url: string
 }
-
-export type PeopleResponse = {
-  count: 82
-  next: string
-  previous: string
-  results: People[]
-}

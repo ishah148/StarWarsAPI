@@ -9,6 +9,7 @@ import {
 import HomeView from '@/views/HomeView.vue'
 import PeopleList from '@/components/PeopleList.vue'
 import PeopleDetails from '@/components/PeopleDetails.vue'
+import SearchPage from '@/components/SearchPage.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -22,17 +23,18 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
-    path: '/:group/:page',
+    path: '/:group/',
     name: 'list',
     component: PeopleList
   },
   {
     path: '/:group/search/:name',
     name: 'search',
-    component: PeopleList
+    component: SearchPage
   },
   {
-    path: '/:group/details/:item',
+    // path: '/:group/details/:item',
+    path: '/:group/:id',
     name: 'details',
     component: PeopleDetails
     // props: {
