@@ -13,7 +13,7 @@
       <div class="tst">
         <ShortDescriptionItem
           v-for="(item, index) in data"
-          :key="item.birth_year + index"
+          :key="index"
           :obj="item"
         />
       </div>

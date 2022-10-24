@@ -20,7 +20,7 @@ export default defineComponent({
   methods: {
     createSrc () {
       const group = this.defineGroup()
-      console.log('group', group)
+      // console.log('group', group)
       if (!group) return ''
       return `img/${group}/${this.url?.split('/').slice(-2, -1)[0]}.jpg`
     },
@@ -29,7 +29,7 @@ export default defineComponent({
     }
   },
   mounted () {
-    console.log('url', this.url)
+    // console.log('url', this.url)
     this.src = this.createSrc()
   },
   updated () {
