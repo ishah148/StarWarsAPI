@@ -14,6 +14,6 @@ apiSwapiInstance.interceptors.response.use(
     return config
   },
   async (error: AxiosError) => {
-    return error.response
+    return error.message
   }
 )
