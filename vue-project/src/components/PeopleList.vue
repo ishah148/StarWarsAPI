@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 <template>
   <SearchBar />
-  <p>Peoples</p>
+  <p class="group-name">{{ $route.params.group }}</p>
   <div class="pagination">
     <button @click="nextPage">Next</button>
     <p>{{ page }}</p>
@@ -11,11 +11,7 @@
     <div class="loading" v-if="isLoading">loading...</div>
     <div class="items" v-if="!isLoading && !isError">
       <div class="tst">
-        <ShortDescriptionItem
-          v-for="(item, index) in data"
-          :key="index"
-          :obj="item"
-        />
+        <ShortDescriptionItem v-for="(item, index) in data" :key="index" :obj="item" />
       </div>
     </div>
     <div class="error" v-else-if="isError">Something was wrong :(</div>
@@ -28,41 +24,56 @@ import { defineComponent } from 'vue'
 import SearchBar from './SearchBar.vue'
 import ShortDescriptionItem from './DescriptionItems/ShortDescriptionItem.vue'
 import { resources, Resources } from '@/models/SwapApi/resources'
+import { LocationQueryValue } from 'vue-router'
 export default defineComponent({
-  data () {
+  data() {
     return {
       page: 1,
       maxPage: 5,
       data: [] as People[],
       seachedData: [] as People[],
       isError: false,
-      isLoading: false
+      isLoading: false,
+      searchQuery: ''
     }
   },
   methods: {
-    nextPage () {
+    nextPage() {
       if (this.page < this.maxPage) {
         this.page++
         this.getData(this.page)
-        this.$router.push({ params: { page: this.page++ } })
+        this.$router.push({ query: { page: this.page++ } })
       }
     },
-    prevPage () {
+    prevPage() {
       if (this.page > 1) {
         this.page--
         this.getData(this.page)
-        this.$router.push({ params: { page: this.page-- } })
+        this.$router.push({ query: { page: this.page-- } })
       }
     },
-    updatePageFromRouter () {
-      const routerPage = +this.$route.params.page
+    updatePageFromRouter() {
+      this.searchQuery = this.getSearchQuery()
+      const routerPage = +(this.$route.query.page || 1)
       if (typeof +routerPage === 'number' && !isNaN(routerPage)) {
         this.page = +routerPage
+        this.setRouterQuery('page', routerPage)
       } else {
         this.page = 1
+        this.setRouterQuery('page', 1)
       }
     },
-    async getData (page: number) {
+    getSearchQuery(): string {
+      const query = this.$route.query.search
+      if (!query) this.$router.push({ query: { page: this.page } })
+      return (this.$route.query.search) as string
+    },
+    setRouterQuery(prop: 'search' | 'page', value: string | number) {
+      // const prevQuery = this.$route.query
+      const query = { [prop]: value }
+      this.$router.push({ query })
+    },
+    async getData(page: number) {
       this.isLoading = true
       this.isError = false
       const group = this.$route.params.group as Resources
@@ -70,7 +81,10 @@ export default defineComponent({
         this.isError = true
         return
       }
-      const res = await SwapiApi.getPeoples(group, page)
+      let res;
+      if (this.getSearchQuery()) {
+        res = await SwapiApi.search(group, this.getSearchQuery())
+      } else { res = await SwapiApi.getPeoples(group, page) }
       this.isLoading = false
       this.data = []
       if (res.status === 200) {
@@ -82,13 +96,17 @@ export default defineComponent({
       return res.data.results
     }
   },
-  mounted () {
+  mounted() {
     this.updatePageFromRouter()
     this.getData(this.page)
   },
   watch: {
-    $route () {
+    $route() {
       this.updatePageFromRouter()
+      this.searchQuery = this.getSearchQuery()
+    },
+    searchQuery: function () {
+      this.getData(1)
     }
   },
   components: { SearchBar, ShortDescriptionItem }
