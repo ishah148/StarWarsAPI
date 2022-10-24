@@ -1,5 +1,4 @@
 <template>
-  <SearchBar />
   <!-- <transition appear :duration="100" name="animate"> -->
   <!-- ... -->
   <div class="container">
@@ -49,17 +48,10 @@ import SearchBar from '@/components/SearchBar.vue'
 import { SwapiApi } from '@/services/api'
 import { defineComponent } from 'vue'
 export default defineComponent({
-  // props: {
-  //   name: String,
-  //   text: String
-  // },
   data () {
     return {}
   },
   watch: {},
-  components: {
-    SearchBar
-  }
 })
 </script>
 

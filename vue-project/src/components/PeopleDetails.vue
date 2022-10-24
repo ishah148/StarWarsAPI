@@ -33,24 +33,19 @@ export default defineComponent({
   },
   methods: {
     async showSearchedData(group: Resources) {
-      // if (!this.url) throw new Error("46: url undefind"); // delete
       this.isLoading = true
       const id = defineId(this.$route.path as string)
-      if (!id) throw new Error("45: id undefind"); // delete
-      try {
-
-        const res = await SwapiApi.getItemById(group, id)
-        console.log('123123')
-        this.isLoading = false
-        if (res.status === 200) {
-          const data = res.data
-          isEmptyItem(data) ? (this.data = data) : this.isError = true
-          if (isEmptyItem(data)) this.errorMessage = 'Not Found'
-        } else this.isError = true
-      }catch(e){
-        console.log('',e)
-        this.isError = true
-        this.isLoading = false
+      if (!id) throw new Error("showSearchedData: 'id' is undefind");
+      const res = await SwapiApi.getItemById(group, id)
+      this.isLoading = false
+      if (res.status === 200) {
+        const data = res.data
+        isEmptyItem(data) ? (this.data = data) : this.isError = true
+        if (isEmptyItem(data)) this.errorMessage = 'Not Found'
+      } else {
+        this.isError = true;
+        this.isLoading = false;
+        if (res.res && typeof res.res === 'string') this.errorMessage = res.res || ''
       }
     }
   },
