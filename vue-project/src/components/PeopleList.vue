@@ -81,7 +81,6 @@ export default defineComponent({
         this.isLoading = false
         if (res.res && typeof res.res === 'string') this.errorMessage = res.res || ''
       }
-
     }
   },
   mounted() {

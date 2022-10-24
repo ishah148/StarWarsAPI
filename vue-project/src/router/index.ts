@@ -28,7 +28,7 @@ const routes: Array<RouteRecordRaw> = [
     component: PeopleList
   },
   {
-    path: '/:group/search/:name',
+    path: '/:group/search/&:name',
     name: 'search',
     component: SearchPage
   },

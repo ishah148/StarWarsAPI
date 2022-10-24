@@ -2,28 +2,30 @@
   <h1>SP</h1>
   <SearchBar />
   <h2>{{ searchQuery }}</h2>
+  <ShortDescriptionItem v-for="(item, index) in data" :key="index" :obj="item" />
 </template>
 
 <script lang="ts">
 import { Resources, resources, SwapApiData } from '@/models/SwapApi/resources'
 import { SwapiApi } from '@/services/api'
 import { defineComponent } from 'vue'
+import ShortDescriptionItem from './DescriptionItems/ShortDescriptionItem.vue'
 import SearchBar from './SearchBar.vue'
 export default defineComponent({
   name: 'SearchPage',
   data() {
     return {
-      searchQuery: this.$route.params.name,
+      searchQuery: this.$route.params.name as string,
       errorMessage: '',
       isError: false,
       isLoading: false,
-      data:[] as SwapApiData[],
-      page:'1',
-      maxPage:1,
+      data: [] as SwapApiData[],
+      page: 1,
+      maxPage: 1,
     }
   },
   methods: {
-    async getData(page: number) {
+    async getData(page?: number) {
       const group = this.$route.params.group as Resources
       if (!resources.includes(group)) {
         this.errorMessage = "Invalid group"
@@ -32,8 +34,9 @@ export default defineComponent({
       }
       this.isLoading = true
       this.isError = false
-
-      const res = await SwapiApi.search(group, page)
+      this.page = +(this.$route.query.page || 1);
+      const res = await SwapiApi.search(group, this.searchQuery ,this.page)
+      if(!this.searchQuery) this.errorMessage = 'Empty'
       this.isLoading = false
       this.data = []
       if (res.status === 200) {
@@ -48,10 +51,11 @@ export default defineComponent({
   },
   watch: {
     $route() {
-      this.searchQuery = this.$route.params.name
+      this.searchQuery = this.$route.params.name as string
+      this.getData()
     }
   },
-  components: { SearchBar }
+  components: { SearchBar, ShortDescriptionItem }
 })
 </script>
 

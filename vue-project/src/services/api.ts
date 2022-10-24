@@ -23,9 +23,9 @@ export class SwapiApi {
       res
     }
   }
-  static async search (group: Resources, item: string) {
+  static async search (group: Resources, item: string ,page: number) {
     const res = await apiSwapiInstance.get<SwapApiResponce >(
-      `${group}/?search=${item}`
+      `${group}/?search=${item}&page=${page}`
     )
     return {
       status: res.status,
