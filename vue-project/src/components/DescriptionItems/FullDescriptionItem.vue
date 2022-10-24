@@ -14,13 +14,8 @@
     </div>
   </div>
 
-  <!-- <div v-for="(item, index) in obj" :key="item.toString()">
-    <p v-if="typeof item === 'string'">{{ index }} : {{ item }}</p>
-  </div> -->
 </template>
 <script lang="ts">
-import { Films } from '@/models/SwapApi/films'
-import { People } from '@/models/SwapApi/people'
 import { SwapApiData } from '@/models/SwapApi/resources'
 import { defineComponent, PropType } from 'vue'
 import MyImage from '../MyImage.vue'

@@ -18,13 +18,11 @@
   </div>
 </template>
 <script lang="ts">
-import { People } from '@/models/SwapApi/people'
 import { SwapiApi } from '@/services/api'
 import { defineComponent } from 'vue'
 import SearchBar from './SearchBar.vue'
 import ShortDescriptionItem from './DescriptionItems/ShortDescriptionItem.vue'
 import { resources, Resources, SwapApiData } from '@/models/SwapApi/resources'
-import { LocationQueryValue } from 'vue-router'
 export default defineComponent({
   data() {
     return {
@@ -66,7 +64,6 @@ export default defineComponent({
       return (this.$route.query.search) as string
     },
     setRouterQuery(prop: 'search' | 'page', value: string | number) {
-      // const prevQuery = this.$route.query
       const query = { [prop]: value }
       this.$router.push({ query })
     },
