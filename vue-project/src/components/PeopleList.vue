@@ -8,21 +8,24 @@
     <button @click="prevPage">Prev</button>
   </div>
   <div class="container">
-    <div class="loading" v-if="isLoading">loading...</div>
     <div class="items" v-if="!isLoading && !isError">
       <div class="tst">
         <ShortDescriptionItem v-for="(item, index) in data" :key="index" :obj="item" />
       </div>
     </div>
-    <div class="error" v-else-if="isError">Something was wrong :(</div>
   </div>
+  <LoadingSpinner class="loading" v-if="isLoading" />
+  <ErrorSign v-if="isError" :msg="errorMessage" />
 </template>
 <script lang="ts">
 import { SwapiApi } from '@/services/api'
 import { defineComponent } from 'vue'
 import SearchBar from './SearchBar.vue'
 import ShortDescriptionItem from './DescriptionItems/ShortDescriptionItem.vue'
+import ErrorSign from './ui/ErrorSign.vue'
+import LoadingSpinner from './ui/LoadingSpinner.vue'
 import { resources, Resources, SwapApiData } from '@/models/SwapApi/resources'
+import { AxiosError } from 'axios'
 export default defineComponent({
   data() {
     return {
@@ -31,6 +34,7 @@ export default defineComponent({
       data: [] as SwapApiData[],
       isError: false,
       isLoading: false,
+      errorMessage: ''
     }
   },
   methods: {
@@ -52,33 +56,21 @@ export default defineComponent({
       const routerPage = +(this.$route.query.page || 1)
       if (typeof +routerPage === 'number' && !isNaN(routerPage)) {
         this.page = +routerPage
-        this.setRouterQuery('page', routerPage)
       } else {
         this.page = 1
-        this.setRouterQuery('page', 1)
       }
     },
-    getSearchQuery(): string {
-      const query = this.$route.query.search
-      if (!query) this.$router.push({ query: { page: this.page } })
-      return (this.$route.query.search) as string
-    },
-    setRouterQuery(prop: 'search' | 'page', value: string | number) {
-      const query = { [prop]: value }
-      this.$router.push({ query })
-    },
     async getData(page: number) {
-      this.isLoading = true
-      this.isError = false
       const group = this.$route.params.group as Resources
       if (!resources.includes(group)) {
+        this.errorMessage = "Invalid group"
         this.isError = true
         return
       }
-      let res;
-      if (this.getSearchQuery()) {
-        res = await SwapiApi.search(group, this.getSearchQuery())
-      } else { res = await SwapiApi.getPeoples(group, page) }
+      this.isLoading = true
+      this.isError = false
+
+      const res = await SwapiApi.getPeoples(group, page)
       this.isLoading = false
       this.data = []
       if (res.status === 200) {
@@ -86,8 +78,10 @@ export default defineComponent({
         this.maxPage = Math.ceil(res.data.count / 10)
       } else {
         this.isError = true
+        this.isLoading = false
+        if (res.res && typeof res.res === 'string') this.errorMessage = res.res || ''
       }
-      return res.data.results
+
     }
   },
   mounted() {
@@ -99,7 +93,7 @@ export default defineComponent({
       this.updatePageFromRouter()
     },
   },
-  components: { SearchBar, ShortDescriptionItem }
+  components: { SearchBar, ShortDescriptionItem, ErrorSign, LoadingSpinner }
 })
 </script>
 <style lang="scss" scoped>
