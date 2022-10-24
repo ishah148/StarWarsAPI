@@ -8,7 +8,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-
 export default defineComponent({
   data() {
     return {
@@ -26,14 +25,9 @@ export default defineComponent({
       this.test2.fname = 3
     },
     log() {
-      this.setRouterQuery('search', this.searchQuery)
-
-    },
-    setRouterQuery(prop: 'search' | 'page', value: string | number) {
-      const prevQuery = this.$route.query
-      // const query = { ...prevQuery, [prop]: value }
-      // this.$router.push({ query })
-      this.$router.push({path:'/people/search'})
+      const group = this.$route.params.group
+      this.$router.push({ path: `/${group}/search/${this.searchQuery}`})
+      
     },
   }
 })
