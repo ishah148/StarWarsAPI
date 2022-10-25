@@ -5,9 +5,6 @@
       <p class="item-name-field">Name:</p>
       <p class="item-name">{{ name }}</p>
     </div>
-    <!-- <p>{{ routerPath }}</p>
-    <p>group {{ group }}</p>
-    <p>id {{ id }}</p> -->
     <button class="button-primary item-button" @click="
     $router.push({
       name: 'details',

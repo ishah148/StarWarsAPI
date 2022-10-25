@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="log" class="search-form">
+  <form @submit.prevent="sumbit" class="search-form">
     <input type="search" class="search-input" v-model="searchQuery" />
     <button type="submit" class="button-primary">Search</button>
   </form>
@@ -17,7 +17,7 @@ export default defineComponent({
   },
   watch: {},
   methods: {
-    log() {
+    sumbit() {
       const group = this.$route.params.group
       if (!this.searchQuery) return
       this.$router.push({ path: `/${group}/search/&${this.searchQuery}`, query: { page: 1 } })

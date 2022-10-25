@@ -28,23 +28,16 @@ const routes: Array<RouteRecordRaw> = [
     component: PeopleList
   },
   {
+    path: '/:group/:id',
+    name: 'details',
+    component: PeopleDetails
+  },
+  {
     path: '/:group/search/&:name',
     name: 'search',
     component: SearchPage
   },
-  {
-    // path: '/:group/details/:item',
-    path: '/:group/:id',
-    name: 'details',
-    component: PeopleDetails
-    // props: {
-    //   props: (route) => {
-    //     console.log('entered route')
-    //     console.log(route)
-    //     return { ...route.params }
-    //   }
-    // }
-  }
+
 
 ]
 

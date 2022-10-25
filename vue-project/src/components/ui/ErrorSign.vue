@@ -1,5 +1,5 @@
 <template>
-  <h2>Something was wrong "("</h2>
+  <h2>Something was wrong (</h2>
   <p v-if="msg">{{ msg }}</p>
 </template>
 <script lang="ts">
