@@ -22,7 +22,7 @@ import FullDescriptionItem from './DescriptionItems/FullDescriptionItem.vue'
 import { defineId } from '@/utils/url_helper'
 import { isEmptyItem } from '@/utils/utils'
 export default defineComponent({
-  name: 'PeopleDetails',
+  name: 'ResourceDetails',
   data() {
     return {
       data: null as unknown as SwapApiData | NotFoundById,
