@@ -28,6 +28,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/:group/:id',
+    // path: '/:group/details/:id',
     name: 'details',
     component: ResourceDetails
   },

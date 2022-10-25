@@ -55,6 +55,12 @@ export default defineComponent({
       this.showSearchedData(group as Resources,)
     } else console.log('this.isError = true 2')
   },
+  watch: {
+    $route() {
+      window.history.go()
+    },
+  }
+  ,
   components: { BackButton, LoadingSpinner, ErrorSign, FullDescriptionItem }
 })
 </script>

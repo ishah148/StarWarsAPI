@@ -9,10 +9,10 @@
     <p class="pagination-counter">{{ page }}</p>
     <button @click="nextPage" class="next-button">Next&nbsp;&raquo;</button>
   </div>
-  <div class="container" v-if="!isLoading && isError">
+  <div class="container" v-if="!isLoading && !isError">
     <ShortDescriptionItem v-for="(item, index) in data" :key="index" :obj="item" />
   </div>
-  <LoadingSpinner v-if="!isLoading" />
+  <LoadingSpinner v-if="isLoading" />
   <ErrorSign v-if="isError" :msg="errorMessage" />
 </template>
 
