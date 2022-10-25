@@ -1,22 +1,24 @@
 <template>
-  <div class="item">
-    <MyImage v-if="obj?.url" :url="url" />
-    <div class="item-description">
-      <p class="item-name-field">Name:</p>
-      <p class="item-name">{{ name }}</p>
+  <div class="item-container">
+    <div class="item">
+      <MyImage class="image" v-if="obj?.url" :url="url" />
+      <div class="item-description">
+        <p class="item-name-field">Name:</p>
+        <p class="item-name">{{ name }}</p>
+      </div>
+      <button class="button-primary item-button" @click="
+  $router.push({
+    name: 'details',
+    path: `${routerPath}`,
+    params: {
+      group,
+      id,
+    },
+  })
+      ">
+        Description
+      </button>
     </div>
-    <button class="button-primary item-button" @click="
-    $router.push({
-      name: 'details',
-      path: `${routerPath}`,
-      params: {
-        group,
-        id,
-      },
-    })
-    ">
-      Description
-    </button>
   </div>
 </template>
 <script lang="ts">
@@ -56,22 +58,37 @@ export default defineComponent({
   components: { MyImage },
 });
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
+.item-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
   .item {
-    background-color:rgba(0, 53, 102, 0.3);
+    background-color: rgba(0, 53, 102, 0.3);
     border-radius: 10px;
+    width: 350px;
+    .image{
+      width: 100%;
+      img{
+        object-fit: contain;
+        object-position: top;
+        width: 100%;
+      }
+    }
   }
-
-  .item-description {
+}
+.item-description {
     display: flex;
     justify-content: space-between;
     padding-left: 10px;
     padding-right: 10px;
-  }
+}
 
-  .item-button {
+.item-button {
     width: 50%;
     margin-bottom: 10px;
     cursor: pointer;
-  }
+}
 </style>

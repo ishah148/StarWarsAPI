@@ -3,12 +3,11 @@
 import {
   createRouter,
   createWebHashHistory,
-  createWebHistory,
   RouteRecordRaw
 } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import PeopleList from '@/components/PeopleList.vue'
-import PeopleDetails from '@/components/PeopleDetails.vue'
+import ResourcesList from '@/components/ResourcesList.vue'
+import ResourceDetails from '@/components/ResourceDetails.vue'
 import SearchPage from '@/components/SearchPage.vue'
 const routes: Array<RouteRecordRaw> = [
   {
@@ -25,12 +24,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/:group/',
     name: 'list',
-    component: PeopleList
+    component: ResourcesList
   },
   {
     path: '/:group/:id',
     name: 'details',
-    component: PeopleDetails
+    component: ResourceDetails
   },
   {
     path: '/:group/search/&:name',

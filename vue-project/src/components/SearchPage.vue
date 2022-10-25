@@ -1,5 +1,5 @@
 <template>
-  <h1>SP</h1>
+  <h1>Search</h1>
   <SearchBar />
   <h2>{{ searchQuery }}</h2>
   <div class="pagination">
@@ -7,7 +7,9 @@
     <p class="pagination-counter">{{ page }}</p>
     <button @click="nextPage" class="next-button">Next&nbsp;&raquo;</button>
   </div>
-  <ShortDescriptionItem v-for="(item, index) in data" :key="index" :obj="item" />
+  <div class="container">
+    <ShortDescriptionItem v-for="(item, index) in data" :key="index" :obj="item" />
+  </div>
   <LoadingSpinner v-if="isLoading" />
   <ErrorSign v-if="isError" :msg="errorMessage" />
 </template>
@@ -39,17 +41,17 @@ export default defineComponent({
         this.page++
         this.getData(this.page)
         this.$router.push({ query: { page: ++this.page } })
-        console.log('rrrr',this.$route.query)
       }
     },
     prevPage() {
       if (this.page > 1) {
         this.page--
         this.getData(this.page)
-        this.$router.push({ query: { page:--this.page } })
+        this.$router.push({ query: { page: --this.page } })
       }
     },
     async getData(page?: number) {
+      if (page) this.page = page
       const group = this.$route.params.group as Resources
       if (!resources.includes(group)) {
         this.errorMessage = "Invalid group"
@@ -93,8 +95,14 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1440px;
+  margin: auto;
+  justify-content: center;
+  gap: 25px;
+}
 </style>
-<!-- if (this.getSearchQuery()) {
-  res = await SwapiApi.search(group, this.getSearchQuery())
-} -->
