@@ -40,16 +40,16 @@ export default defineComponent({
   methods: {
     nextPage() {
       if (this.page < this.maxPage) {
-        this.page++
         this.getData(this.page)
-        this.$router.push({ query: { page: this.page++ } })
+        this.$router.push({ query: { page: ++this.page } })
+        this.page++
       }
     },
     prevPage() {
       if (this.page > 1) {
-        this.page--
         this.getData(this.page)
-        this.$router.push({ query: { page: this.page-- } })
+        this.$router.push({ query: { page: --this.page } })
+        this.page--
       }
     },
     updatePageFromRouter() {
@@ -111,40 +111,6 @@ export default defineComponent({
   flex-direction: row;
   justify-content: center;
   gap: 20px;
-}
-
-.pagination {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 20px;
-  padding-right: 20px;
-}
-
-.pagination-counter {
-  font-size: 30px;
-  line-height: 30px;
-}
-
-.next-button,
-.prev-button {
-  width: 90px;
-  height: 40px;
-  display: block;
-  border: 2px solid #e0be4f;
-  color: #000814;
-  background-color: #ffd60a;
-  border-radius: 17px;
-  text-decoration: none;
-  font-weight: 400;
-  line-height: 26px;
-  cursor: pointer;
-  &:hover {
-    transition: 0.5s;
-    -webkit-box-shadow: 0px 0px 10px 3px #e0be4f;
-    -moz-box-shadow: 0px 0px 10px 3px #e0be4f;
-    box-shadow: 0px 0px 10px 3px #e0be4f;
-  }
 }
 
 .group-name {

@@ -2,9 +2,14 @@
   <h1>SP</h1>
   <SearchBar />
   <h2>{{ searchQuery }}</h2>
+  <div class="pagination">
+    <button @click="prevPage" class="prev-button">&laquo;&nbsp;Prev</button>
+    <p class="pagination-counter">{{ page }}</p>
+    <button @click="nextPage" class="next-button">Next&nbsp;&raquo;</button>
+  </div>
   <ShortDescriptionItem v-for="(item, index) in data" :key="index" :obj="item" />
-  <LoadingSpinner v-if="isLoading"/>
-  <ErrorSign v-if="isError" :msg="errorMessage"/>
+  <LoadingSpinner v-if="isLoading" />
+  <ErrorSign v-if="isError" :msg="errorMessage" />
 </template>
 
 <script lang="ts">
@@ -29,6 +34,21 @@ export default defineComponent({
     }
   },
   methods: {
+    nextPage() {
+      if (this.page < this.maxPage) {
+        this.page++
+        this.getData(this.page)
+        this.$router.push({ query: { page: ++this.page } })
+        console.log('rrrr',this.$route.query)
+      }
+    },
+    prevPage() {
+      if (this.page > 1) {
+        this.page--
+        this.getData(this.page)
+        this.$router.push({ query: { page:--this.page } })
+      }
+    },
     async getData(page?: number) {
       const group = this.$route.params.group as Resources
       if (!resources.includes(group)) {
@@ -39,11 +59,17 @@ export default defineComponent({
       this.isLoading = true
       this.isError = false
       this.page = +(this.$route.query.page || 1);
-      const res = await SwapiApi.search(group, this.searchQuery, this.page)
-      if (!this.searchQuery) this.errorMessage = 'Empty'
-      this.isLoading = false
       this.data = []
+      const res = await SwapiApi.search(group, this.searchQuery, this.page)
+      this.isLoading = false
+      console.log('', res)
       if (res.status === 200) {
+        if (!res.data.count) {
+          this.errorMessage = 'Not Found'
+          this.isLoading = false
+          this.isError = true
+          return
+        }
         this.data.push(...res.data.results)
         this.maxPage = Math.ceil(res.data.count / 10)
       } else {
@@ -58,6 +84,9 @@ export default defineComponent({
       this.searchQuery = this.$route.params.name as string
       this.getData()
     }
+  },
+  mounted() {
+    this.getData()
   },
   components: { SearchBar, ShortDescriptionItem, LoadingSpinner, ErrorSign }
 })
