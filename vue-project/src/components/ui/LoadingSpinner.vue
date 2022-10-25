@@ -2,14 +2,16 @@
   <h2>Loading....</h2>
   <section class="main">
     <div class="loader">
-      <SpaceShip class="spaceship" />
+      <MySvg class="spaceship" />
     </div>
   </section>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
+import MySvg from '../icons/MySvg.vue';
 export default defineComponent({
-  name: 'LoadingSpinner'
+  name: "LoadingSpinner",
+  components: { MySvg }
 })
 </script>
 <style scoped>
