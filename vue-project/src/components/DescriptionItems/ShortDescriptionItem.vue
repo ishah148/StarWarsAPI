@@ -1,21 +1,26 @@
 <template>
-  <MyImage v-if="obj?.url" :url="url" />
-  <p>{{ name }}</p>
-  <p>{{ routerPath }}</p>
-  <p>group {{group}}</p>
-  <p>id {{id}}</p>
-  <button class="item-button" @click="
-  $router.push({
-    name: 'details',
-    path: `${routerPath}`,
-    params: {
-      group,
-      id,
-    },
-  })
-  ">
-    Description
-  </button>
+  <div class="item">
+    <MyImage v-if="obj?.url" :url="url" />
+    <div class="item-description">
+      <p class="item-name-field">Name:</p>
+      <p class="item-name">{{ name }}</p>
+    </div>
+    <!-- <p>{{ routerPath }}</p>
+    <p>group {{ group }}</p>
+    <p>id {{ id }}</p> -->
+    <button class="button-primary item-button" @click="
+    $router.push({
+      name: 'details',
+      path: `${routerPath}`,
+      params: {
+        group,
+        id,
+      },
+    })
+    ">
+      Description
+    </button>
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
@@ -54,3 +59,22 @@ export default defineComponent({
   components: { MyImage },
 });
 </script>
+<style lang="scss" scoped>
+  .item {
+    background-color:rgba(0, 53, 102, 0.3);
+    border-radius: 10px;
+  }
+
+  .item-description {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .item-button {
+    width: 50%;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+</style>

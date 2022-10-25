@@ -1,7 +1,7 @@
 <template>
   <div>
     <img v-if="src" :src="src" alt="image"
-      @error.once="src ='img/placeholder-small.jpg'" />
+      @error.once="src ='img/placeholder-small.jpg'" class="item-image"/>
   </div>
 </template>
 <script lang="ts">
@@ -33,5 +33,8 @@ export default defineComponent({
 })
 </script>
 <style scoped lang="scss">
-
+  .item-image{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
 </style>

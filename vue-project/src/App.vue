@@ -11,6 +11,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import HeaderBar from '@/components/HeaderBar.vue'
+import './styles/normalize.css'
+import './styles/fonts.css'
+import './styles/main.scss'
 
 export default defineComponent({
   name: 'HomeView',
@@ -19,29 +22,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="scss">
-* {
-  box-sizing: border-box;
-}
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>

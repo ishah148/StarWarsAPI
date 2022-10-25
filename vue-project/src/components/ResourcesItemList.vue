@@ -13,31 +13,31 @@
       <div class="image-container">
         <img :src="'img/planets/9.jpg'" alt="" />
       </div>
-     <router-link class="link" to="/planets">Planets</router-link>
+      <router-link class="link" to="/planets">Planets</router-link>
     </div>
     <div class="item">
       <div class="image-container">
         <img :src="'img/films/1.jpg'" alt="" />
       </div>
-     <router-link class="link" to="/films">Films</router-link>
+      <router-link class="link" to="/films">Films</router-link>
     </div>
     <div class="item">
       <div class="image-container">
         <img :src="'img/vehicles/20.jpg'" alt="" />
       </div>
-     <router-link class="link" to="/vehicles">Vehicles</router-link>
+      <router-link class="link" to="/vehicles">Vehicles</router-link>
     </div>
     <div class="item">
       <div class="image-container">
         <img :src="'img/starships/40.jpg'" alt="" />
       </div>
-     <router-link class="link" to="/starships">Starships</router-link>
+      <router-link class="link" to="/starships">Starships</router-link>
     </div>
     <div class="item">
       <div class="image-container">
         <img :src="'img/species/79.jpg'" alt="" />
       </div>
-     <router-link class="link" to="/species">Species</router-link>
+      <router-link class="link" to="/species">Species</router-link>
     </div>
   </div>
   <!-- </transition> -->
@@ -48,7 +48,7 @@ import SearchBar from '@/components/SearchBar.vue'
 import { SwapiApi } from '@/services/api'
 import { defineComponent } from 'vue'
 export default defineComponent({
-  data () {
+  data() {
     return {}
   },
   watch: {},
@@ -60,6 +60,7 @@ export default defineComponent({
   height: 30px;
   width: 50px;
 }
+
 .container {
   max-width: 1200px;
   margin: auto;
@@ -69,30 +70,54 @@ export default defineComponent({
   justify-content: center;
   gap: 20px;
 }
+
 .item {
   width: 300px;
-  height: 370px;
-  padding: 10px;
-  border: 3px solid green;
+  height: 405px;
+  border: 3px solid #003566;
+  -webkit-box-shadow: 0px 0px 10px 3px #003566;
+  -moz-box-shadow: 0px 0px 10px 3px #003566;
+  box-shadow: 0px 0px 10px 3px #003566;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+
   .image-container {
     display: block;
-    width: 280px;
-    height: 280px;
+    width: 100%;
+    height: 330px;
+
     img {
-      object-fit: cover;
+      // object-fit: cover;
       width: 100%;
       height: 100%;
     }
+
     // aspect-ratio: 1/1;
   }
 }
+
 .link {
-  border: 2px solid green;
-  width: 70px;
+  border: 2px solid #003566;
+  width: 145px;
+  height: 30px;
   align-self: center;
+  color: #e0be4f;
+  background-color: #001d3d;
+  border-radius: 2px;
+  text-decoration: none;
+  font-weight: 400;
+  line-height: 26px;
+  margin-bottom: 20px;
+
+  &:hover {
+    transition: 0.5s;
+    -webkit-box-shadow: 0px 0px 10px 3px #003566;
+    -moz-box-shadow: 0px 0px 10px 3px #003566;
+    box-shadow: 0px 0px 10px 3px #003566;
+  }
 }
+
 .animate-enter-active {
   animation: bounce-in 0.5s ease-out both;
 }
@@ -105,6 +130,7 @@ export default defineComponent({
   0% {
     opacity: 0.5;
   }
+
   100% {
     opacity: 1;
   }

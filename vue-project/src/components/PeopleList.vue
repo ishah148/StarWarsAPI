@@ -1,17 +1,17 @@
 /* eslint-disable camelcase */
 <template>
-  <SearchBar />
-  <p class="group-name">{{ $route.params.group }}</p>
+  <div class="searchbar-wrapper">
+    <p class="group-name">Group: {{ $route.params.group }}</p>
+    <SearchBar />
+  </div>
   <div class="pagination">
-    <button @click="nextPage">Next</button>
-    <p>{{ page }}</p>
-    <button @click="prevPage">Prev</button>
+    <button @click="prevPage" class="prev-button">&laquo;&nbsp;Prev</button>
+    <p class="pagination-counter">{{ page }}</p>
+    <button @click="nextPage" class="next-button">Next&nbsp;&raquo;</button>
   </div>
   <div class="container">
     <div class="items" v-if="!isLoading && !isError">
-      <div class="tst">
         <ShortDescriptionItem v-for="(item, index) in data" :key="index" :obj="item" />
-      </div>
     </div>
   </div>
   <LoadingSpinner class="loading" v-if="isLoading" />
@@ -96,6 +96,13 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
+
+.searchbar-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+}
 .items {
   max-width: 1200px;
   margin: auto;
@@ -104,5 +111,43 @@ export default defineComponent({
   flex-direction: row;
   justify-content: center;
   gap: 20px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+  padding-right: 20px;
+}
+
+.pagination-counter {
+  font-size: 30px;
+  line-height: 30px;
+}
+
+.next-button,
+.prev-button {
+  width: 90px;
+  height: 40px;
+  display: block;
+  border: 2px solid #e0be4f;
+  color: #000814;
+  background-color: #ffd60a;
+  border-radius: 17px;
+  text-decoration: none;
+  font-weight: 400;
+  line-height: 26px;
+  cursor: pointer;
+  &:hover {
+    transition: 0.5s;
+    -webkit-box-shadow: 0px 0px 10px 3px #e0be4f;
+    -moz-box-shadow: 0px 0px 10px 3px #e0be4f;
+    box-shadow: 0px 0px 10px 3px #e0be4f;
+  }
+}
+
+.group-name {
+  text-transform: uppercase;
 }
 </style>

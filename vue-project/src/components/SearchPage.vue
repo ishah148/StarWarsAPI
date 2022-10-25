@@ -3,6 +3,8 @@
   <SearchBar />
   <h2>{{ searchQuery }}</h2>
   <ShortDescriptionItem v-for="(item, index) in data" :key="index" :obj="item" />
+  <LoadingSpinner v-if="isLoading"/>
+  <ErrorSign v-if="isError" :msg="errorMessage"/>
 </template>
 
 <script lang="ts">
@@ -11,6 +13,8 @@ import { SwapiApi } from '@/services/api'
 import { defineComponent } from 'vue'
 import ShortDescriptionItem from './DescriptionItems/ShortDescriptionItem.vue'
 import SearchBar from './SearchBar.vue'
+import ErrorSign from './ui/ErrorSign.vue'
+import LoadingSpinner from './ui/LoadingSpinner.vue'
 export default defineComponent({
   name: 'SearchPage',
   data() {
@@ -35,8 +39,8 @@ export default defineComponent({
       this.isLoading = true
       this.isError = false
       this.page = +(this.$route.query.page || 1);
-      const res = await SwapiApi.search(group, this.searchQuery ,this.page)
-      if(!this.searchQuery) this.errorMessage = 'Empty'
+      const res = await SwapiApi.search(group, this.searchQuery, this.page)
+      if (!this.searchQuery) this.errorMessage = 'Empty'
       this.isLoading = false
       this.data = []
       if (res.status === 200) {
@@ -55,15 +59,12 @@ export default defineComponent({
       this.getData()
     }
   },
-  components: { SearchBar, ShortDescriptionItem }
+  components: { SearchBar, ShortDescriptionItem, LoadingSpinner, ErrorSign }
 })
 </script>
 
 <style scoped>
-.button-primary {
-  height: 30px;
-  width: 60px;
-}
+
 </style>
 <!-- if (this.getSearchQuery()) {
   res = await SwapiApi.search(group, this.getSearchQuery())
