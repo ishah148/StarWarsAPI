@@ -9,12 +9,13 @@
     <p class="pagination-counter">{{ page }}</p>
     <button @click="nextPage" class="next-button">Next&nbsp;&raquo;</button>
   </div>
-  <div class="container" v-if="!isLoading && !isError">
+  <div class="container" v-if="!isLoading && isError">
     <ShortDescriptionItem v-for="(item, index) in data" :key="index" :obj="item" />
   </div>
-  <LoadingSpinner class="loading" v-if="isLoading" />
+  <LoadingSpinner v-if="!isLoading" />
   <ErrorSign v-if="isError" :msg="errorMessage" />
 </template>
+
 <script lang="ts">
 import { SwapiApi } from "@/services/api";
 import { defineComponent } from "vue";
@@ -23,7 +24,6 @@ import ShortDescriptionItem from "./DescriptionItems/ShortDescriptionItem.vue";
 import ErrorSign from "./ui/ErrorSign.vue";
 import LoadingSpinner from "./ui/LoadingSpinner.vue";
 import { resources, Resources, SwapApiData } from "@/models/SwapApi/resources";
-import { AxiosError } from "axios";
 export default defineComponent({
   data() {
     return {
@@ -94,6 +94,7 @@ export default defineComponent({
   components: { SearchBar, ShortDescriptionItem, ErrorSign, LoadingSpinner },
 });
 </script>
+
 <style lang="scss" scoped>
 .searchbar-wrapper {
   display: flex;

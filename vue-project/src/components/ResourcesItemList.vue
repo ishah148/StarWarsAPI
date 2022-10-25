@@ -7,7 +7,7 @@
         <img :src="'img/people/20.jpg'" alt="" />
       </div>
       <!-- <p class="link">Peoples</p> -->
-      <router-link class="link" to="/people/?page=1" >Peoples</router-link>
+      <router-link class="link" to="/people/?page=1">Peoples</router-link>
     </div>
     <div class="item">
       <div class="image-container">
@@ -91,6 +91,8 @@ export default defineComponent({
       // object-fit: cover;
       width: 100%;
       height: 100%;
+      object-fit: cover;
+      object-position: top;
     }
 
     // aspect-ratio: 1/1;

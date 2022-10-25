@@ -1,5 +1,5 @@
 <template>
-  <h2>Loading....</h2>
+  <p class="text">Loading....</p>
   <section class="main">
     <div class="loader">
       <MySvg class="spaceship" />
@@ -8,7 +8,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import MySvg from '../icons/MySvg.vue';
+import MySvg from '@/assets/icons/MySvg.vue';
 export default defineComponent({
   name: "LoadingSpinner",
   components: { MySvg }
@@ -17,16 +17,23 @@ export default defineComponent({
 <style scoped>
 .main {
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
+.text {
+  font-size: 24px;
+  font-weight: normal;
+}
 
 .loader {
   width: 80px;
   height: 80px;
+  position: absolute;
+  top: 0;
 
   -webkit-animation: spin 2s linear infinite;
   -moz-animation: spin 2s linear infinite;
