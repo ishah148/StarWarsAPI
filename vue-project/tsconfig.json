@@ -1,0 +1,32 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.web.json",
+  "include": [
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.vue"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "preserveValueImports": false,
+    "importsNotUsedAsValues": "preserve",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "lib": [
+      "es2019","DOM"
+    ]
+  },
+  "types": [
+    "node"
+  ],
+  "typeRoots": [
+    "../node_modules/@types"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.config.json"
+    }
+  ]
+}

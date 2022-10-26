@@ -1,0 +1,90 @@
+body {
+  font-family: "Starwars", Avenir, Helvetica, Arial, sans-serif;
+  color: #e0be4f;
+  background-image: url('../assets/img/death-star-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  padding: 25px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+}
+
+nav {
+  padding: 30px;
+
+  a {
+    color: #e0be4f;
+    text-decoration:none; 
+    &.router-link-exact-active {
+      color: #7896ff;
+      text-decoration: underline;
+    }
+  }
+
+  a:link {
+    color: #e0be4f;
+  }
+}
+
+button {
+  padding: 0;
+  margin: 0;
+}
+
+.button-primary {
+  border: 2px solid #003566;
+  align-self: center;
+  color: #e0be4f;
+  background-color: #001d3d;
+  border-radius: 2px;
+  text-decoration: none;
+  font-weight: 400;
+  line-height: 26px;
+
+  &:hover {
+    transition: 0.5s;
+    -webkit-box-shadow: 0px 0px 10px 3px #003566;
+    -moz-box-shadow: 0px 0px 10px 3px #003566;
+    box-shadow: 0px 0px 10px 3px #003566;
+  }
+}
+.pagination-counter {
+  font-size: 30px;
+  line-height: 30px;
+}
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+  padding-right: 20px;
+}
+.next-button,
+.prev-button {
+  width: 90px;
+  height: 40px;
+  display: block;
+  border: 2px solid #e0be4f;
+  color: #000814;
+  background-color: #ffd60a;
+  border-radius: 17px;
+  text-decoration: none;
+  font-weight: 400;
+  line-height: 26px;
+  cursor: pointer;
+  &:hover {
+    transition: 0.5s;
+    -webkit-box-shadow: 0px 0px 10px 3px #e0be4f;
+    -moz-box-shadow: 0px 0px 10px 3px #e0be4f;
+    box-shadow: 0px 0px 10px 3px #e0be4f;
+  }
+}
