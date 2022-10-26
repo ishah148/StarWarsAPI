@@ -81,7 +81,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
+  background: rgb(0 0 0 / 70%);
   .image-container {
     display: block;
     width: 100%;

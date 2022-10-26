@@ -17,5 +17,8 @@ export default defineComponent({
 })
 </script>
 <style scoped lang="scss">
-
+.header__container{
+  max-width: 1440px;
+  margin: auto;
+}
 </style>

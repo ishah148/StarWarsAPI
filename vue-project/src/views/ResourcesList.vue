@@ -19,12 +19,12 @@
 <script lang="ts">
 import { SwapiApi } from "@/services/api";
 import { defineComponent } from "vue";
-import SearchBar from "./ui/SearchBar.vue";
-import ShortDescriptionItem from "./DescriptionItems/ShortDescriptionItem.vue";
-import ErrorSign from "./ui/ErrorSign.vue";
-import LoadingSpinner from "./ui/LoadingSpinner.vue";
+import SearchBar from "../components/ui/SearchBar.vue";
+import ShortDescriptionItem from "../components/ShortDescriptionItem.vue";
+import ErrorSign from "../components/ui/ErrorSign.vue";
+import LoadingSpinner from "../components/ui/LoadingSpinner.vue";
 import { resources, Resources, SwapApiData } from "@/models/SwapApi/resources";
-import BackButton from "./ui/BackButton.vue";
+import BackButton from "../components/ui/BackButton.vue";
 export default defineComponent({
   data() {
     return {

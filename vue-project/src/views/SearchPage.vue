@@ -1,7 +1,6 @@
 <template>
   <h1>Search</h1>
   <SearchBar />
-  <h2>{{ searchQuery }}</h2>
   <div class="pagination">
     <button @click="prevPage" class="prev-button">&laquo;&nbsp;Prev</button>
     <p class="pagination-counter">{{ page }}</p>
@@ -18,10 +17,10 @@
 import { Resources, resources, SwapApiData } from '@/models/SwapApi/resources'
 import { SwapiApi } from '@/services/api'
 import { defineComponent } from 'vue'
-import ShortDescriptionItem from './DescriptionItems/ShortDescriptionItem.vue'
-import ErrorSign from './ui/ErrorSign.vue'
-import LoadingSpinner from './ui/LoadingSpinner.vue'
-import SearchBar from './ui/SearchBar.vue'
+import ShortDescriptionItem from '../components/ShortDescriptionItem.vue'
+import ErrorSign from '../components/ui/ErrorSign.vue'
+import LoadingSpinner from '../components/ui/LoadingSpinner.vue'
+import SearchBar from '../components/ui/SearchBar.vue'
 export default defineComponent({
   name: 'SearchPage',
   data() {
@@ -67,7 +66,7 @@ export default defineComponent({
       console.log('', res)
       if (res.status === 200) {
         if (!res.data.count) {
-          this.errorMessage = 'Not Found'
+          this.errorMessage = this.searchQuery + ' Not Found'
           this.isLoading = false
           this.isError = true
           return

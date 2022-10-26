@@ -24,7 +24,7 @@
 import { SwapApiData } from '@/models/SwapApi/resources'
 import { defineGroup, defineId, getValidPath } from '@/utils/url_helper'
 import { defineComponent, PropType } from 'vue'
-import MyImage from '../MyImage.vue'
+import MyImage from './MyImage.vue'
 export default defineComponent({
   name: 'FullDescriptionItem',
   props: {
@@ -166,6 +166,7 @@ export default defineComponent({
 
   img {
     border-radius: 50%;
+    object-fit: cover;
   }
 }
 </style>

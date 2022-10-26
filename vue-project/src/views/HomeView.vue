@@ -1,13 +1,12 @@
 <template>
   <div class="home-page">
-    <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
     <ResourcesItemList />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import ResourcesItemList from '@/components/ResourcesItemList.vue'
+import ResourcesItemList from '@/views/ResourcesItemList.vue'
 
 export default defineComponent({
   name: 'HomeView',

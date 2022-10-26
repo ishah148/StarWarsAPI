@@ -6,20 +6,14 @@ import {
   RouteRecordRaw
 } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import ResourcesList from '@/components/ResourcesList.vue'
-import ResourceDetails from '@/components/ResourceDetails.vue'
-import SearchPage from '@/components/SearchPage.vue'
+import ResourcesList from '@/views/ResourcesList.vue'
+import ResourceDetails from '@/views/ResourceDetails.vue'
+import SearchPage from '@/views/SearchPage.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'home',
     component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    component: () =>
-      import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
     path: '/:group/',
@@ -28,7 +22,6 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/:group/:id',
-    // path: '/:group/details/:id',
     name: 'details',
     component: ResourceDetails
   },
@@ -43,7 +36,6 @@ const routes: Array<RouteRecordRaw> = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  // history: createWebHistory(process.env.BASE_URL),
   routes
 })
 

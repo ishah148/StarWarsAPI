@@ -53,6 +53,7 @@ export default defineComponent({
   caret-color: #e0be4f;
   color: #e0be4f;
   font-size: 20px;
+  border: none;
 }
 
 
