@@ -3,7 +3,6 @@
     <input type="search" class="search-input" v-model="searchQuery" />
     <button type="submit" class="button-primary">Search</button>
   </form>
-
 </template>
 
 <script lang="ts">
@@ -32,21 +31,18 @@ export default defineComponent({
   width: 90px;
   cursor: pointer;
 }
-
 .search-form {
   width: 80%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
 }
-
 .search-input {
   width: 50%;
   height: 35px;
   margin-right: 30px;
   padding-left: 10px;
   padding-right: 5px;
-
   border-radius: 4px;
   background-color: #003566;
   outline: none;

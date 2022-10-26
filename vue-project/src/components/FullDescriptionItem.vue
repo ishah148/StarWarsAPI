@@ -6,7 +6,6 @@
         <p class="description__text" v-for="(item, index) in strings" :key="item">{{ index }} : {{ item }}</p>
       </div>
     </div>
-
     <div class="description-links__container" v-for="(item, index) in arrays" :key="index">
       <p class="description-links__group" :key="item">{{ index }}: <br></p>
       <div class="description-links__image-container" v-for="(url, index) in item" :key="index">
@@ -18,8 +17,8 @@
       </div>
     </div>
   </div>
-
 </template>
+
 <script lang="ts">
 import { SwapApiData } from '@/models/SwapApi/resources'
 import { defineGroup, defineId, getValidPath } from '@/utils/url_helper'
@@ -120,7 +119,6 @@ export default defineComponent({
     align-items: center;
   }
   .description__info-image {
-    // flex: 1;
     width: 300px;
     img {
       border: 2px solid;
@@ -129,8 +127,6 @@ export default defineComponent({
   }
 
   .description__text-container {
-
-    // flex: 1;
     .description__text {
       text-align: start;
       font-weight: normal;

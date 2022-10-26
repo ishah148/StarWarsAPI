@@ -4,6 +4,7 @@
     <BackButton />
   </div>
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
 import BackButton from './ui/BackButton.vue';
@@ -16,6 +17,7 @@ export default defineComponent({
   components: { BackButton }
 })
 </script>
+
 <style scoped lang="scss">
 .header__container{
   max-width: 1440px;

@@ -4,6 +4,7 @@
       @error.once="src ='img/placeholder-small.jpg'" class="item-image"/>
   </div>
 </template>
+
 <script lang="ts">
 import { resources } from '@/models/SwapApi/resources'
 import { defineComponent } from 'vue'
@@ -32,10 +33,8 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="scss">
-  .item-image{
 
-  }
+<style lang="scss">
   img{
     width: 100%;
     height: 100%;

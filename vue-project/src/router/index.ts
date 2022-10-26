@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import {
   createRouter,
   createWebHashHistory,
@@ -30,7 +28,6 @@ const routes: Array<RouteRecordRaw> = [
     name: 'search',
     component: SearchPage
   },
-
 
 ]
 

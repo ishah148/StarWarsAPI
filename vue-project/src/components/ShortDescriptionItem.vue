@@ -6,29 +6,20 @@
         <p class="item-name-field">Name:</p>
         <p class="item-name">{{ name }}</p>
       </div>
-      <button class="button-primary item-button" @click="
-  $router.push({
-    name: 'details',
-    path: `${routerPath}`,
-    params: {
-      group,
-      id,
-    },
-  })
-      ">
+      <button class="button-primary item-button" @click="redirect">
         Description
       </button>
     </div>
   </div>
 </template>
+
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import MyImage from "@/components/MyImage.vue";
 import { People } from "@/models/SwapApi/people";
 import { Films } from "@/models/SwapApi/films";
-import { Resources, SwapApiData } from "@/models/SwapApi/resources";
+import { SwapApiData } from "@/models/SwapApi/resources";
 import { defineGroup, defineId, getValidPath } from "@/utils/url_helper";
-import { SwapiApi } from "@/services/api";
 export default defineComponent({
   name: "ShortDescriptionItem",
   props: {
@@ -49,15 +40,25 @@ export default defineComponent({
         ? (this.name = (this.obj as Films)?.title)
         : (this.name = (this.obj as People)?.name);
     },
+    redirect() {
+      this.$router.push({
+        name: 'details',
+        path: `${this.routerPath}`,
+        params: {
+          group:this.group,
+          id:this.id,
+        },
+      })
+    }
   },
   mounted() {
     this.group = defineGroup(this.$route.path);
-    if (!this.obj?.url) throw new Error("no url (pouterPath)"); // TODO delete !
     this.defineName();
   },
   components: { MyImage },
 });
 </script>
+
 <style lang="scss">
 .item-container {
   display: flex;

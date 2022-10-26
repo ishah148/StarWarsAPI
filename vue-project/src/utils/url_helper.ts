@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 import { resources } from '@/models/SwapApi/resources'
 
 export function defineGroup (url: string) {
@@ -15,7 +14,6 @@ export function isValidUrl (string: string) {
 
 export function defineId(url:string){
   if(url.slice(-1) === '/') url = url.slice(0,-1)
-  // console.log('newURL',url)
   if(!url) throw new Error("defineId: 'URL' is undef");
   const id = url.split('/').slice(-1)[0]
   if(typeof (+id) !== 'number') throw new Error("defineId: ID is not correct");
@@ -24,6 +22,5 @@ export function defineId(url:string){
 
 export function getValidPath(url:string){
   if(!url) throw new Error("no 'URL' in getValidPAth");
-  // console.log('getValidPath',url, '---------',url.split('https://swapi.dev/api/')[1])
   return url.split('https://swapi.dev/api/')[1]
 }

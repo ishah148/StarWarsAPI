@@ -63,7 +63,6 @@ export default defineComponent({
       this.data = []
       const res = await SwapiApi.search(group, this.searchQuery, this.page)
       this.isLoading = false
-      console.log('', res)
       if (res.status === 200) {
         if (!res.data.count) {
           this.errorMessage = this.searchQuery + ' Not Found'

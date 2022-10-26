@@ -1,12 +1,9 @@
 <template>
-  <!-- <transition appear :duration="100" name="animate"> -->
-  <!-- ... -->
   <div class="main__container">
     <div class="item">
       <div class="image-container">
         <img :src="'img/people/20.jpg'" alt="" />
       </div>
-      <!-- <p class="link">Peoples</p> -->
       <router-link class="link" to="/people/?page=1">Peoples</router-link>
     </div>
     <div class="item">
@@ -40,12 +37,9 @@
       <router-link class="link" to="/species/?page=1">Species</router-link>
     </div>
   </div>
-  <!-- </transition> -->
 </template>
 
 <script lang="ts">
-import SearchBar from '@/components/ui/SearchBar.vue'
-import { SwapiApi } from '@/services/api'
 import { defineComponent } from 'vue'
 export default defineComponent({
   data() {
@@ -86,16 +80,12 @@ export default defineComponent({
     display: block;
     width: 100%;
     height: 330px;
-
     img {
-      // object-fit: cover;
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: top;
     }
-
-    // aspect-ratio: 1/1;
   }
 }
 

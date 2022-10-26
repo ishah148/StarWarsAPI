@@ -24,7 +24,6 @@ import ShortDescriptionItem from "../components/ShortDescriptionItem.vue";
 import ErrorSign from "../components/ui/ErrorSign.vue";
 import LoadingSpinner from "../components/ui/LoadingSpinner.vue";
 import { resources, Resources, SwapApiData } from "@/models/SwapApi/resources";
-import BackButton from "../components/ui/BackButton.vue";
 export default defineComponent({
   data() {
     return {
@@ -68,7 +67,6 @@ export default defineComponent({
       }
       this.isLoading = true;
       this.isError = false;
-
       const res = await SwapiApi.getPeoples(group, page);
       this.isLoading = false;
       this.data = [];

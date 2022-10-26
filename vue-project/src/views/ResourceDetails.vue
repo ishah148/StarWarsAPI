@@ -1,5 +1,4 @@
 <template>
-  <h2>Peopde Detatailes</h2>
   <div v-if="isLoading">
     <LoadingSpinner />
   </div>
@@ -16,7 +15,6 @@ import { SwapiApi } from '@/services/api'
 import { NotFoundById, Resources, resources, SwapApiData } from '@/models/SwapApi/resources'
 import LoadingSpinner from '../components/ui/LoadingSpinner.vue'
 import ErrorSign from '../components/ui/ErrorSign.vue'
-import BackButton from '../components/ui/BackButton.vue'
 import FullDescriptionItem from '../components/FullDescriptionItem.vue'
 import { defineId } from '@/utils/url_helper'
 import { isEmptyItem } from '@/utils/utils'
@@ -50,17 +48,11 @@ export default defineComponent({
     }
   },
   mounted() {
-    const [, group, ,] = this.$route.path.split('/')
-    if (resources.includes(group)) {
+    const group = this.$route.params.group
+    if (resources.includes(group as string)) {
       this.showSearchedData(group as Resources,)
-    } else console.log('this.isError = true 2')
+    } else this.isError = true
   },
-  watch: {
-    $route() {
-      // window.history.go()
-    },
-  }
-  ,
   components: { LoadingSpinner, ErrorSign, FullDescriptionItem }
 })
 </script>
