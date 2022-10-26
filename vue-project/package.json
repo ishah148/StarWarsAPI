@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check build-only",
-    "preview": "vite preview",
+    "build": "run-p type-check build-only --base=./",
+    "preview": "vite preview --base=/",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
