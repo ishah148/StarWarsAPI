@@ -1,6 +1,5 @@
 <template>
   <h2>Peopde Detatailes</h2>
-  <BackButton />
   <div v-if="isLoading">
     <LoadingSpinner />
   </div>
@@ -13,11 +12,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import BackButton from './ui/BackButton.vue'
 import { SwapiApi } from '@/services/api'
 import { NotFoundById, Resources, resources, SwapApiData } from '@/models/SwapApi/resources'
 import LoadingSpinner from './ui/LoadingSpinner.vue'
 import ErrorSign from './ui/ErrorSign.vue'
+import BackButton from './ui/BackButton.vue'
 import FullDescriptionItem from './DescriptionItems/FullDescriptionItem.vue'
 import { defineId } from '@/utils/url_helper'
 import { isEmptyItem } from '@/utils/utils'
@@ -62,7 +61,7 @@ export default defineComponent({
     },
   }
   ,
-  components: { LoadingSpinner, ErrorSign, FullDescriptionItem, BackButton }
+  components: { LoadingSpinner, ErrorSign, FullDescriptionItem }
 })
 </script>
 

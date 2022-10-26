@@ -1,7 +1,7 @@
 <template>
   <!-- <transition appear :duration="100" name="animate"> -->
   <!-- ... -->
-  <div class="container">
+  <div class="main__container">
     <div class="item">
       <div class="image-container">
         <img :src="'img/people/20.jpg'" alt="" />
@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import SearchBar from '@/components/SearchBar.vue'
+import SearchBar from '@/components/ui/SearchBar.vue'
 import { SwapiApi } from '@/services/api'
 import { defineComponent } from 'vue'
 export default defineComponent({
@@ -61,7 +61,7 @@ export default defineComponent({
   width: 50px;
 }
 
-.container {
+.main__container {
   max-width: 1200px;
   margin: auto;
   display: flex;

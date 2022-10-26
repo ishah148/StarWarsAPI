@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home-page">
     <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
     <ResourcesItemList />
   </div>
@@ -16,3 +16,8 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="scss">
+.home-page {
+  padding: 25px;
+}
+</style>

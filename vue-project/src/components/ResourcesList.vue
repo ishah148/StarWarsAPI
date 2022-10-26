@@ -1,4 +1,4 @@
-/* eslint-disable camelcase */
+
 <template>
   <div class="searchbar-wrapper">
     <p class="group-name">Group: {{ $route.params.group }}</p>
@@ -19,11 +19,12 @@
 <script lang="ts">
 import { SwapiApi } from "@/services/api";
 import { defineComponent } from "vue";
-import SearchBar from "./SearchBar.vue";
+import SearchBar from "./ui/SearchBar.vue";
 import ShortDescriptionItem from "./DescriptionItems/ShortDescriptionItem.vue";
 import ErrorSign from "./ui/ErrorSign.vue";
 import LoadingSpinner from "./ui/LoadingSpinner.vue";
 import { resources, Resources, SwapApiData } from "@/models/SwapApi/resources";
+import BackButton from "./ui/BackButton.vue";
 export default defineComponent({
   data() {
     return {

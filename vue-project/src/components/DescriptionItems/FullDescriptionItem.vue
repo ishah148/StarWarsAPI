@@ -115,12 +115,15 @@ export default defineComponent({
   display: flex;
   justify-content: space-evenly;
   gap: 30px;
-
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
   .description__info-image {
     // flex: 1;
     width: 300px;
-
     img {
+      border: 2px solid;
       width: 300px;
     }
   }

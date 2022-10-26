@@ -1,17 +1,21 @@
 <template>
   <div class="header__container">
     <h1>Star Wars Wiki</h1>
-    <slot></slot>
+    <BackButton />
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
+import BackButton from './ui/BackButton.vue';
 
 export default defineComponent({
-  name: 'HeaderMain',
+  name: "HeaderMain",
   props: {
     msg: String
-  }
+  },
+  components: { BackButton }
 })
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

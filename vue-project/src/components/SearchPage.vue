@@ -19,9 +19,9 @@ import { Resources, resources, SwapApiData } from '@/models/SwapApi/resources'
 import { SwapiApi } from '@/services/api'
 import { defineComponent } from 'vue'
 import ShortDescriptionItem from './DescriptionItems/ShortDescriptionItem.vue'
-import SearchBar from './SearchBar.vue'
 import ErrorSign from './ui/ErrorSign.vue'
 import LoadingSpinner from './ui/LoadingSpinner.vue'
+import SearchBar from './ui/SearchBar.vue'
 export default defineComponent({
   name: 'SearchPage',
   data() {
