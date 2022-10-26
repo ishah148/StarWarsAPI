@@ -5,7 +5,7 @@
       <router-link to="/about">About</router-link>
     </nav>
   </HeaderBar>
-  <router-view />
+  <router-view :key="$route.fullPath"/>
 </template>
 
 <script lang="ts">

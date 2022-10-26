@@ -21,11 +21,12 @@ import ErrorSign from './ui/ErrorSign.vue'
 import FullDescriptionItem from './DescriptionItems/FullDescriptionItem.vue'
 import { defineId } from '@/utils/url_helper'
 import { isEmptyItem } from '@/utils/utils'
+
 export default defineComponent({
   name: 'ResourceDetails',
   data() {
     return {
-      data: null as unknown as SwapApiData | NotFoundById,
+      data: {} as SwapApiData | NotFoundById,
       isLoading: false,
       isError: false,
       errorMessage: ''
@@ -57,11 +58,11 @@ export default defineComponent({
   },
   watch: {
     $route() {
-      window.history.go()
+      // window.history.go()
     },
   }
   ,
-  components: { BackButton, LoadingSpinner, ErrorSign, FullDescriptionItem }
+  components: { LoadingSpinner, ErrorSign, FullDescriptionItem, BackButton }
 })
 </script>
 
