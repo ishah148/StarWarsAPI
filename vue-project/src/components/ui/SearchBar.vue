@@ -23,7 +23,7 @@ export default defineComponent({
         path: `/${group}/search/`,
         name: "search",
         query: { page: 1 },
-        params: { name: this.searchQuery },
+        params: { query: this.searchQuery },
       });
     },
   },

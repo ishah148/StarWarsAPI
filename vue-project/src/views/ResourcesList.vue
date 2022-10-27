@@ -79,8 +79,8 @@ export default defineComponent({
       } else {
         this.isError = true;
         this.isLoading = false;
-        if (res.res && typeof res.res === "string")
-          this.errorMessage = res.res || "";
+        if (res.responce && typeof res.responce === "string")
+          this.errorMessage = res.responce;
       }
     },
   },

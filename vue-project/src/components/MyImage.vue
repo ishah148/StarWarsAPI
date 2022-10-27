@@ -12,6 +12,7 @@
 
 <script lang="ts">
 import { resources } from "@/models/SwapApi/resources";
+import { defineGroup, defineId } from "@/utils/url_helper";
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "MyImage",
@@ -25,12 +26,10 @@ export default defineComponent({
   },
   methods: {
     createSrc() {
-      const group = this.defineGroup();
-      if (!group) return "";
-      return `img/${group}/${this.url?.split("/").slice(-2, -1)[0]}.jpg`;
-    },
-    defineGroup() {
-      return this.url?.split("/").filter((i) => resources.includes(i))[0];
+      const group = defineGroup(this.url);
+      const id = defineId(this.url);
+      if (!group && !id) return "";
+      return `img/${group}/${id}.jpg`;
     },
   },
   mounted() {

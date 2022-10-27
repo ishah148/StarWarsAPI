@@ -61,13 +61,15 @@ export default defineComponent({
       this.groupingStrings();
     },
     groupingArray() {
-      const filteredArr = Object.entries(this.obj || {}).filter(
+      if (!this.obj) return;
+      const filteredArr = Object.entries(this.obj).filter(
         (i) => Array.isArray(i[1]) && i[1].length > 1
       );
       this.arrays = Object.fromEntries(filteredArr);
     },
     groupingUrls() {
-      const filteredUrls = Object.entries(this.obj || {}).filter((i) => {
+      if (!this.obj) return;
+      const filteredUrls = Object.entries(this.obj).filter((i) => {
         if (typeof i[1] === "string" && i[1].includes("http")) {
           return true;
         }
@@ -76,7 +78,8 @@ export default defineComponent({
       this.urls = Object.fromEntries(filteredUrls);
     },
     groupingStrings() {
-      const filteredStr = Object.entries(this.obj || {}).filter((i) => {
+      if (!this.obj) return;
+      const filteredStr = Object.entries(this.obj).filter((i) => {
         const [value, property] = i;
         if (
           typeof property === "string" &&

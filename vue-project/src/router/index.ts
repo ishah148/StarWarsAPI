@@ -20,7 +20,7 @@ const routes: Array<RouteRecordRaw> = [
     component: ResourceDetails,
   },
   {
-    path: "/:group/search/:name",
+    path: "/:group/search/:query",
     name: "search",
     component: SearchPage,
   },
