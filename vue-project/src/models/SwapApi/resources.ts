@@ -7,7 +7,7 @@ import { Vehicles } from "./vehicles"
 
 export type SwapApiData = Planet | Vehicles | Species | Starships | People | Films
 export type SwapApiResponce = {
-  count: 82
+  count: number
   next: string
   previous: string
   results: SwapApiData[]

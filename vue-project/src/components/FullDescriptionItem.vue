@@ -1,5 +1,5 @@
 <template>
-  <div class="description__container" v-if="Object.keys(obj || {}).length">
+  <div class="description__container" v-if="isObjEmpty(obj as SwapApiData)">
     <div class="description__info-container">
       <MyImage class="description__info-image" :url="obj?.url" />
       <div class="description__text-container">
@@ -34,36 +34,47 @@ export default defineComponent({
       urls: {},
       arrays: {},
       strings: {},
-      temp: '',
     }
   },
   methods: {
-    filterData() {
+    startDataGrouping() {
+      this.groupingArray()
+      this.groupingUrls()
+      this.groupingStrings()
+    },
+    groupingArray() {
       const filteredArr = Object.entries(this.obj || {}).filter(
         (i) => Array.isArray(i[1]) && i[1].length > 1
       )
       this.arrays = Object.fromEntries(filteredArr)
-
+    },
+    groupingUrls() {
       const filteredUrls = Object.entries(this.obj || {}).filter((i) => {
         if (typeof i[1] === 'string' && i[1].includes('http')) {
           return true
-        } else return false
+        } 
+        return false
       })
       this.urls = Object.fromEntries(filteredUrls)
-
+    },
+    groupingStrings() {
       const filteredStr = Object.entries(this.obj || {}).filter((i) => {
+        const [value,property] = i
         if (
-          typeof i[1] === 'string' &&
-          !i[1].includes('http') &&
-          i[0] !== 'created' &&
-          i[0] !== 'edited'
+          typeof property === 'string' &&
+          !property.includes('http') &&
+          value !== 'created' &&
+          value !== 'edited'
         ) {
           return true
         } else return false
       })
       this.strings = Object.fromEntries(filteredStr)
-
     },
+    isObjEmpty(obj: Object) {
+      return !!Object.keys(obj).length
+    }
+    ,
     redirect(url: string) {
       const newUrl = getValidPath(url)
       this.$router.push({
@@ -83,13 +94,10 @@ export default defineComponent({
 
   },
   mounted() {
-    this.filterData()
+    this.startDataGrouping()
   },
   updated() {
-    if (
-      !Object.keys(this.strings || {}).length ||
-      !Object.keys(this.strings || {})
-    ) { this.filterData() }
+    this.startDataGrouping() 
   },
   components: { MyImage }
 })
