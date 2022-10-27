@@ -113,7 +113,7 @@ export default defineComponent({
     this.startDataGrouping();
   },
   updated() {
-    this.startDataGrouping();
+    if (!this.isObjEmpty(this.strings)) this.startDataGrouping();
   },
   components: { MyImage },
 });
