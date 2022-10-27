@@ -6,23 +6,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 export default defineComponent({
   data() {
     return {
-      text: '',
-      searchQuery: '',
-    }
+      text: "",
+      searchQuery: "",
+    };
   },
   watch: {},
   methods: {
     sumbit() {
-      const group = this.$route.params.group
-      if (!this.searchQuery) return
-      this.$router.push({ path: `/${group}/search/&${this.searchQuery}`, query: { page: 1 } })
+      const group = this.$route.params.group;
+      if (!this.searchQuery) return;
+      this.$router.push({
+        path: `/${group}/search/&${this.searchQuery}`,
+        query: { page: 1 },
+      });
     },
   },
-})
+});
 </script>
 
 <style scoped>
@@ -51,6 +54,4 @@ export default defineComponent({
   font-size: 20px;
   border: none;
 }
-
-
 </style>

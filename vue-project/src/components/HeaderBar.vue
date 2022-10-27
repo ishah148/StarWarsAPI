@@ -6,20 +6,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import BackButton from './ui/BackButton.vue';
+import { defineComponent } from "vue";
+import BackButton from "./ui/BackButton.vue";
 
 export default defineComponent({
   name: "HeaderMain",
   props: {
-    msg: String
+    msg: String,
   },
-  components: { BackButton }
-})
+  components: { BackButton },
+});
 </script>
 
 <style scoped lang="scss">
-.header__container{
+.header__container {
   max-width: 1440px;
   margin: auto;
 }

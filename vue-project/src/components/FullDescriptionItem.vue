@@ -3,15 +3,33 @@
     <div class="description__info-container">
       <MyImage class="description__info-image" :url="obj?.url" />
       <div class="description__text-container">
-        <p class="description__text" v-for="(item, index) in strings" :key="item">{{ index }} : {{ item }}</p>
+        <p
+          class="description__text"
+          v-for="(item, index) in strings"
+          :key="item"
+        >
+          {{ index }} : {{ item }}
+        </p>
       </div>
     </div>
-    <div class="description-links__container" v-for="(item, index) in arrays" :key="index">
-      <p class="description-links__group" :key="item">{{ index }}: <br></p>
-      <div class="description-links__image-container" v-for="(url, index) in item" :key="index">
-        <router-link class="link" :to="{
-          name: 'details', params: { group: getGroupUrl(url), id: getIdUrl(url) }
-        }">
+    <div
+      class="description-links__container"
+      v-for="(item, index) in arrays"
+      :key="index"
+    >
+      <p class="description-links__group" :key="item">{{ index }}: <br /></p>
+      <div
+        class="description-links__image-container"
+        v-for="(url, index) in item"
+        :key="index"
+      >
+        <router-link
+          class="link"
+          :to="{
+            name: 'details',
+            params: { group: getGroupUrl(url), id: getIdUrl(url) },
+          }"
+        >
           <MyImage class="description-links__image" :url="url" />
         </router-link>
       </div>
@@ -20,87 +38,85 @@
 </template>
 
 <script lang="ts">
-import { SwapApiData } from '@/models/SwapApi/resources'
-import { defineGroup, defineId, getValidPath } from '@/utils/url_helper'
-import { defineComponent, PropType } from 'vue'
-import MyImage from './MyImage.vue'
+import { SwapApiData } from "@/models/SwapApi/resources";
+import { defineGroup, defineId, getValidPath } from "@/utils/url_helper";
+import { defineComponent, PropType } from "vue";
+import MyImage from "./MyImage.vue";
 export default defineComponent({
-  name: 'FullDescriptionItem',
+  name: "FullDescriptionItem",
   props: {
-    obj: Object as PropType<SwapApiData>
+    obj: Object as PropType<SwapApiData>,
   },
   data() {
     return {
       urls: {},
       arrays: {},
       strings: {},
-    }
+    };
   },
   methods: {
     startDataGrouping() {
-      this.groupingArray()
-      this.groupingUrls()
-      this.groupingStrings()
+      this.groupingArray();
+      this.groupingUrls();
+      this.groupingStrings();
     },
     groupingArray() {
       const filteredArr = Object.entries(this.obj || {}).filter(
         (i) => Array.isArray(i[1]) && i[1].length > 1
-      )
-      this.arrays = Object.fromEntries(filteredArr)
+      );
+      this.arrays = Object.fromEntries(filteredArr);
     },
     groupingUrls() {
       const filteredUrls = Object.entries(this.obj || {}).filter((i) => {
-        if (typeof i[1] === 'string' && i[1].includes('http')) {
-          return true
-        } 
-        return false
-      })
-      this.urls = Object.fromEntries(filteredUrls)
+        if (typeof i[1] === "string" && i[1].includes("http")) {
+          return true;
+        }
+        return false;
+      });
+      this.urls = Object.fromEntries(filteredUrls);
     },
     groupingStrings() {
       const filteredStr = Object.entries(this.obj || {}).filter((i) => {
-        const [value,property] = i
+        const [value, property] = i;
         if (
-          typeof property === 'string' &&
-          !property.includes('http') &&
-          value !== 'created' &&
-          value !== 'edited'
+          typeof property === "string" &&
+          !property.includes("http") &&
+          value !== "created" &&
+          value !== "edited"
         ) {
-          return true
-        } else return false
-      })
-      this.strings = Object.fromEntries(filteredStr)
+          return true;
+        } else return false;
+      });
+      this.strings = Object.fromEntries(filteredStr);
     },
     isObjEmpty(obj: Object) {
-      return !!Object.keys(obj).length
-    }
-    ,
+      return !!Object.keys(obj).length;
+    },
     redirect(url: string) {
-      const newUrl = getValidPath(url)
+      const newUrl = getValidPath(url);
       this.$router.push({
-        name: 'details',
+        name: "details",
         params: {
           group: defineGroup(newUrl),
-          id: defineId(newUrl)
+          id: defineId(newUrl),
         },
-      })
+      });
     },
     getGroupUrl(url: string) {
-      return defineGroup(url)
+      return defineGroup(url);
     },
     getIdUrl(url: string) {
-      return defineId(url)
+      return defineId(url);
     },
-
   },
   mounted() {
-    this.startDataGrouping()
+    this.startDataGrouping();
   },
   updated() {
-    this.startDataGrouping() 
+    this.startDataGrouping();
   },
-  components: { MyImage }
-})
+  components: { MyImage },
+});
 </script>
 
 <style lang="scss">
@@ -142,7 +158,8 @@ export default defineComponent({
     }
   }
 
-  .description-links__container {}
+  .description-links__container {
+  }
 }
 
 .description-links__container {

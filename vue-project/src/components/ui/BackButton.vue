@@ -1,29 +1,35 @@
 <template>
-<div class="nav__container">
-  <button class="nav__btn" @click="
-    () => {
-      $router.back()
-    }
-  ">
-    Return
-  </button>
-  <button class="nav__btn" @click="
-  () => {
-    $router.push({ path: '/' })
-  }
-  ">
-    Home
-  </button>
-</div>
+  <div class="nav__container">
+    <button
+      class="nav__btn"
+      @click="
+        () => {
+          $router.back();
+        }
+      "
+    >
+      Return
+    </button>
+    <button
+      class="nav__btn"
+      @click="
+        () => {
+          $router.push({ path: '/' });
+        }
+      "
+    >
+      Home
+    </button>
+  </div>
 </template>
 <script lang="ts">
 export default {
-  name: 'BackButton'
-}
+  name: "BackButton",
+};
 </script>
 
 <style lang="scss">
-.nav__container{
+.nav__container {
   display: flex;
   gap: 20px;
 }

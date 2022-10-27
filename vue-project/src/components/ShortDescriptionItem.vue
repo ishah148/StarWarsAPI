@@ -42,14 +42,14 @@ export default defineComponent({
     },
     redirect() {
       this.$router.push({
-        name: 'details',
+        name: "details",
         path: `${this.routerPath}`,
         params: {
-          group:this.group,
-          id:this.id,
+          group: this.group,
+          id: this.id,
         },
-      })
-    }
+      });
+    },
   },
   mounted() {
     this.group = defineGroup(this.$route.path);
@@ -70,9 +70,9 @@ export default defineComponent({
     background-color: rgba(0, 53, 102, 0.3);
     border-radius: 10px;
     width: 350px;
-    .image{
+    .image {
       width: 100%;
-      img{
+      img {
         object-fit: contain;
         object-position: top;
         width: 100%;
@@ -81,15 +81,15 @@ export default defineComponent({
   }
 }
 .item-description {
-    display: flex;
-    justify-content: space-between;
-    padding-left: 10px;
-    padding-right: 10px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .item-button {
-    width: 50%;
-    margin-bottom: 10px;
-    cursor: pointer;
+  width: 50%;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 </style>

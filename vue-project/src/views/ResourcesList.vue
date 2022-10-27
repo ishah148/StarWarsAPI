@@ -1,4 +1,3 @@
-
 <template>
   <div class="searchbar-wrapper">
     <p class="group-name">Group: {{ $route.params.group }}</p>
@@ -10,7 +9,11 @@
     <button @click="nextPage" class="next-button">Next&nbsp;&raquo;</button>
   </div>
   <div class="container" v-if="!isLoading && !isError">
-    <ShortDescriptionItem v-for="(item, index) in data" :key="index" :obj="item" />
+    <ShortDescriptionItem
+      v-for="(item, index) in data"
+      :key="index"
+      :obj="item"
+    />
   </div>
   <LoadingSpinner v-if="isLoading" />
   <ErrorSign v-if="isError" :msg="errorMessage" />
