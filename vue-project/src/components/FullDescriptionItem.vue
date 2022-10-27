@@ -62,15 +62,17 @@ export default defineComponent({
     },
     groupingArray() {
       if (!this.obj) return;
-      const filteredArr = Object.entries(this.obj).filter(
-        (i) => Array.isArray(i[1]) && i[1].length > 1
-      );
+      const filteredArr = Object.entries(this.obj).filter((i) => {
+        const value = i[1];
+        return Array.isArray(value) && value.length > 1;
+      });
       this.arrays = Object.fromEntries(filteredArr);
     },
     groupingUrls() {
       if (!this.obj) return;
       const filteredUrls = Object.entries(this.obj).filter((i) => {
-        if (typeof i[1] === "string" && i[1].includes("http")) {
+        const value = i[1];
+        if (typeof value === "string" && value.includes("http")) {
           return true;
         }
         return false;
@@ -80,12 +82,12 @@ export default defineComponent({
     groupingStrings() {
       if (!this.obj) return;
       const filteredStr = Object.entries(this.obj).filter((i) => {
-        const [value, property] = i;
+        const [key, value] = i;
         if (
-          typeof property === "string" &&
-          !property.includes("http") &&
-          value !== "created" &&
-          value !== "edited"
+          typeof value === "string" &&
+          !value.includes("http") &&
+          key !== "created" &&
+          key !== "edited"
         ) {
           return true;
         } else return false;
