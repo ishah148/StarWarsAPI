@@ -20,8 +20,10 @@ export default defineComponent({
       const group = this.$route.params.group;
       if (!this.searchQuery) return;
       this.$router.push({
-        path: `/${group}/search/&${this.searchQuery}`,
+        path: `/${group}/search/`,
+        name: "search",
         query: { page: 1 },
+        params: { name: this.searchQuery },
       });
     },
   },

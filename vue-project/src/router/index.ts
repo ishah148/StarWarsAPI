@@ -10,7 +10,7 @@ const routes: Array<RouteRecordRaw> = [
     component: HomeView,
   },
   {
-    path: "/:group/",
+    path: "/:group",
     name: "list",
     component: ResourcesList,
   },
@@ -20,7 +20,7 @@ const routes: Array<RouteRecordRaw> = [
     component: ResourceDetails,
   },
   {
-    path: "/:group/search/&:name",
+    path: "/:group/search/:name",
     name: "search",
     component: SearchPage,
   },
