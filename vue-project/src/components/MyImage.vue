@@ -1,42 +1,46 @@
 <template>
   <div>
-    <img v-if="src" :src="src" alt="image"
-      @error.once="src ='img/placeholder-small.jpg'" class="item-image"/>
+    <img
+      v-if="src"
+      :src="src"
+      alt="image"
+      @error.once="src = 'img/placeholder-small.jpg'"
+      class="item-image"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { resources } from '@/models/SwapApi/resources'
-import { defineComponent } from 'vue'
+import { resources } from "@/models/SwapApi/resources";
+import { defineGroup, defineId } from "@/utils/url_helper";
+import { defineComponent } from "vue";
 export default defineComponent({
-  name: 'MyImage',
+  name: "MyImage",
   props: {
-    url: String
+    url: String,
   },
   data() {
     return {
-      src: ''
-    }
+      src: "",
+    };
   },
   methods: {
     createSrc() {
-      const group = this.defineGroup()
-      if (!group) return ''
-      return `img/${group}/${this.url?.split('/').slice(-2, -1)[0]}.jpg`
+      const group = defineGroup(this.url);
+      const id = defineId(this.url);
+      if (!group && !id) return "";
+      return `img/${group}/${id}.jpg`;
     },
-    defineGroup() {
-      return this.url?.split('/').filter((i) => resources.includes(i))[0]
-    }
   },
   mounted() {
-    this.src = this.createSrc()
-  }
-})
+    this.src = this.createSrc();
+  },
+});
 </script>
 
 <style lang="scss">
-  img{
-    width: 100%;
-    height: 100%;
-  }
+img {
+  width: 100%;
+  height: 100%;
+}
 </style>

@@ -7,12 +7,12 @@
   </section>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
-import MySvg from '@/assets/icons/MySvg.vue';
+import { defineComponent } from "vue";
+import MySvg from "@/assets/icons/MySvg.vue";
 export default defineComponent({
   name: "LoadingSpinner",
-  components: { MySvg }
-})
+  components: { MySvg },
+});
 </script>
 <style scoped>
 .main {

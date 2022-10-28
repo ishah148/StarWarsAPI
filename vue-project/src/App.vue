@@ -5,20 +5,20 @@
       <router-link to="/about">About</router-link>
     </nav>
   </HeaderBar>
-  <router-view :key="$route.fullPath"/>
+  <router-view :key="$route.fullPath" />
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import HeaderBar from '@/components/HeaderBar.vue'
-import './styles/normalize.css'
-import './styles/fonts.css'
-import './styles/main.scss'
+import { defineComponent } from "vue";
+import HeaderBar from "@/components/HeaderBar.vue";
+import "./styles/normalize.css";
+import "./styles/fonts.css";
+import "./styles/main.scss";
 
 export default defineComponent({
-  name: 'HomeView',
+  name: "HomeView",
   components: {
-    HeaderBar
-  }
-})
+    HeaderBar,
+  },
+});
 </script>

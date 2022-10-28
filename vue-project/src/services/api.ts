@@ -1,36 +1,41 @@
 /* eslint-disable camelcase */
-import { NotFoundById, Resources, SwapApiData, SwapApiResponce } from '@/models/SwapApi/resources'
-import { AxiosError } from 'axios'
-import { apiSwapiInstance } from './axios_service'
+import {
+  NotFoundById,
+  Resources,
+  SwapApiData,
+  SwapApiResponce,
+} from "@/models/SwapApi/resources";
+import { AxiosError } from "axios";
+import { apiSwapiInstance } from "./axios_service";
 export class SwapiApi {
-  static async getPeoples (group: Resources, page: number) {
-    const res = await apiSwapiInstance.get<SwapApiResponce>(
+  static async getPeoples(group: Resources, page: number) {
+    const responce = await apiSwapiInstance.get<SwapApiResponce>(
       `/${group}?page=${page}`
-    )
+    );
     return {
-      status: res.status,
-      data: res.data,
-      res,
-    }
+      status: responce.status,
+      data: responce.data,
+      responce,
+    };
   }
-  static async getItemById (group: Resources, id: number | string) {
-    const res = await apiSwapiInstance.get<SwapApiData | NotFoundById>(
+  static async getItemById(group: Resources, id: number | string) {
+    const responce = await apiSwapiInstance.get<SwapApiData | NotFoundById>(
       `/${group}/${id}`
-    )
+    );
     return {
-      status: res.status,
-      data: res.data,
-      res
-    }
+      status: responce.status,
+      data: responce.data,
+      responce,
+    };
   }
-  static async search (group: Resources, item: string ,page: number) {
-    const res = await apiSwapiInstance.get<SwapApiResponce >(
-      `${group}/?search=${item}&page=${page}`
-    )
+  static async search(group: Resources, query: string, page: number) {
+    const responce = await apiSwapiInstance.get<SwapApiResponce>(
+      `${group}/?search=${query}&page=${page}`
+    );
     return {
-      status: res.status,
-      data: res.data,
-      res
-    }
+      status: responce.status,
+      data: responce.data,
+      responce,
+    };
   }
 }

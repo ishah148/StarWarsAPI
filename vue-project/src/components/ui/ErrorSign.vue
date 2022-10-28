@@ -3,11 +3,11 @@
   <p v-if="msg">{{ msg }}</p>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 export default defineComponent({
-  name: 'ErrorSign',
+  name: "ErrorSign",
   props: {
-    msg: String
-  }
-})
+    msg: String,
+  },
+});
 </script>
