@@ -93,6 +93,7 @@ export default defineComponent({
       this.updatePageFromRouter();
     },
   },
+  setup() {},
   components: { SearchBar, ShortDescriptionItem, ErrorSign, LoadingSpinner },
 });
 </script>
@@ -104,6 +105,7 @@ export default defineComponent({
   padding-left: 20px;
   padding-right: 20px;
 }
+
 .container {
   display: flex;
   flex-direction: row;
@@ -114,6 +116,7 @@ export default defineComponent({
   justify-content: center;
   gap: 25px;
 }
+
 .group-name {
   text-transform: uppercase;
 }
