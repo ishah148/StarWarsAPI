@@ -5,7 +5,7 @@
       <router-link to="/about">About</router-link>
     </nav>
   </HeaderBar>
-  <!-- <router-view :key="$route.fullPath" /> -->
+  <router-view :key="$route.fullPath" />
   <SandBox />
 </template>
 

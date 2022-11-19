@@ -1,6 +1,7 @@
 <template>
   <h1>SandBox</h1>
   <h2>Test: {{ test }}</h2>
+  <h2>Test: {{ testObj }}</h2>
   <button @click="increment">increment</button>
   <button @click="some">some</button>
 </template>

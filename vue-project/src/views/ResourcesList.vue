@@ -1,3 +1,5 @@
+<!-- eslint-disable vue/no-dupe-keys -->
+<!-- eslint-disable vue/no-dupe-keys -->
 <template>
   <div class="searchbar-wrapper">
     <p class="group-name">Group: {{ $route.params.group }}</p>
@@ -21,15 +23,28 @@
 
 <script lang="ts">
 import { SwapiApi } from "@/services/api";
-import { defineComponent } from "vue";
+import { defineComponent, getCurrentInstance, onUpdated, ref } from "vue";
 import SearchBar from "../components/ui/SearchBar.vue";
 import ShortDescriptionItem from "../components/ShortDescriptionItem.vue";
 import ErrorSign from "../components/ui/ErrorSign.vue";
 import LoadingSpinner from "../components/ui/LoadingSpinner.vue";
 import { resources, Resources, SwapApiData } from "@/models/SwapApi/resources";
+import { useRoute, useRouter } from "vue-router";
+import usePagination from "@/hooks/usePagination";
 export default defineComponent({
+  components: { SearchBar, ShortDescriptionItem, ErrorSign, LoadingSpinner },
+  setup(props, context) {
+    const { nextPage, page, prevPage, updatePageFromRouter } = usePagination();
+    return {
+      nextPage,
+      page,
+      prevPage,
+      updatePageFromRouter,
+    };
+  },
   data() {
     return {
+      // eslint-disable-next-line vue/no-dupe-keys
       page: 1,
       maxPage: 5,
       data: [] as SwapApiData[],
@@ -38,29 +53,12 @@ export default defineComponent({
       errorMessage: "",
     };
   },
+  mounted() {
+    console.log("mounted");
+    this.updatePageFromRouter();
+    this.getData(this.page);
+  },
   methods: {
-    nextPage() {
-      if (this.page < this.maxPage) {
-        this.page++;
-        this.getData(this.page);
-        this.$router.push({ query: { page: this.page } });
-      }
-    },
-    prevPage() {
-      if (this.page > 1) {
-        this.page--;
-        this.getData(this.page);
-        this.$router.push({ query: { page: this.page } });
-      }
-    },
-    updatePageFromRouter() {
-      const routerPage = +(this.$route.query.page || 1);
-      if (typeof +routerPage === "number" && !isNaN(routerPage)) {
-        this.page = +routerPage;
-      } else {
-        this.page = 1;
-      }
-    },
     async getData(page: number) {
       const group = this.$route.params.group as Resources;
       if (!resources.includes(group)) {
@@ -84,17 +82,6 @@ export default defineComponent({
       }
     },
   },
-  mounted() {
-    this.updatePageFromRouter();
-    this.getData(this.page);
-  },
-  watch: {
-    $route() {
-      this.updatePageFromRouter();
-    },
-  },
-  setup() {},
-  components: { SearchBar, ShortDescriptionItem, ErrorSign, LoadingSpinner },
 });
 </script>
 

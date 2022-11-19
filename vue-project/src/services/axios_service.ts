@@ -14,5 +14,5 @@ apiSwapiInstance.interceptors.response.use(
   },
   async (error: AxiosError) => {
     return error.message;
-  }
+  },
 );
