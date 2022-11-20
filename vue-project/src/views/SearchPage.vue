@@ -18,15 +18,28 @@
 </template>
 
 <script lang="ts">
+import usePagination from "@/hooks/usePagination";
 import { Resources, resources, SwapApiData } from "@/models/SwapApi/resources";
 import { SwapiApi } from "@/services/api";
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import ShortDescriptionItem from "../components/ShortDescriptionItem.vue";
 import ErrorSign from "../components/ui/ErrorSign.vue";
 import LoadingSpinner from "../components/ui/LoadingSpinner.vue";
 import SearchBar from "../components/ui/SearchBar.vue";
 export default defineComponent({
   name: "SearchPage",
+  components: { SearchBar, ShortDescriptionItem, LoadingSpinner, ErrorSign },
+  setup() {
+    const maxPage = ref(1);
+    const { nextPage, page, prevPage, updatePageFromRouter } =
+      usePagination(maxPage);
+    return {
+      nextPage,
+      page,
+      prevPage,
+      maxPage,
+    };
+  },
   data() {
     return {
       searchQuery: this.$route.params.query as string,
@@ -34,25 +47,18 @@ export default defineComponent({
       isError: false,
       isLoading: false,
       data: [] as SwapApiData[],
-      page: 1,
-      maxPage: 1,
     };
   },
+  watch: {
+    $route() {
+      this.searchQuery = this.$route.params.name as string;
+      this.getData();
+    },
+  },
+  mounted() {
+    this.getData();
+  },
   methods: {
-    nextPage() {
-      if (this.page < this.maxPage) {
-        this.page++;
-        this.getData(this.page);
-        this.$router.push({ query: { page: ++this.page } });
-      }
-    },
-    prevPage() {
-      if (this.page > 1) {
-        this.page--;
-        this.getData(this.page);
-        this.$router.push({ query: { page: --this.page } });
-      }
-    },
     async getData(page?: number) {
       if (page) this.page = page;
       const group = this.$route.params.group as Resources;
@@ -84,16 +90,6 @@ export default defineComponent({
       }
     },
   },
-  watch: {
-    $route() {
-      this.searchQuery = this.$route.params.name as string;
-      this.getData();
-    },
-  },
-  mounted() {
-    this.getData();
-  },
-  components: { SearchBar, ShortDescriptionItem, LoadingSpinner, ErrorSign },
 });
 </script>
 

@@ -5,11 +5,11 @@
     <p class="group-name">Group: {{ $route.params.group }}</p>
     <SearchBar />
   </div>
-  <div class="pagination">
-    <button @click="prevPage" class="prev-button">&laquo;&nbsp;Prev</button>
-    <p class="pagination-counter">{{ page }}</p>
-    <button @click="nextPage" class="next-button">Next&nbsp;&raquo;</button>
-  </div>
+  <PaginationWrapper
+    :page-number="page"
+    @next-page="nextPage"
+    @prev-page="prevPage"
+  />
   <div class="container" v-if="!isLoading && !isError">
     <ShortDescriptionItem
       v-for="(item, index) in data"
@@ -22,65 +22,44 @@
 </template>
 
 <script lang="ts">
-import { SwapiApi } from "@/services/api";
-import { defineComponent, getCurrentInstance, onUpdated, ref } from "vue";
+import { defineComponent } from "vue";
 import SearchBar from "../components/ui/SearchBar.vue";
 import ShortDescriptionItem from "../components/ShortDescriptionItem.vue";
+import PaginationWrapper from "@/components/PaginationWrapper.vue";
 import ErrorSign from "../components/ui/ErrorSign.vue";
 import LoadingSpinner from "../components/ui/LoadingSpinner.vue";
-import { resources, Resources, SwapApiData } from "@/models/SwapApi/resources";
-import { useRoute, useRouter } from "vue-router";
 import usePagination from "@/hooks/usePagination";
+import useFetchStarWarsData from "@/hooks/useFetchStarWarsData";
 export default defineComponent({
-  components: { SearchBar, ShortDescriptionItem, ErrorSign, LoadingSpinner },
-  setup(props, context) {
-    const { nextPage, page, prevPage, updatePageFromRouter } = usePagination();
+  components: {
+    SearchBar,
+    ShortDescriptionItem,
+    ErrorSign,
+    LoadingSpinner,
+    PaginationWrapper,
+  },
+  setup() {
+    const { data, errorMessage, getData, isError, isLoading, maxPage } =
+      useFetchStarWarsData();
+    const { nextPage, page, prevPage, updatePageFromRouter } =
+      usePagination(maxPage);
     return {
       nextPage,
       page,
       prevPage,
       updatePageFromRouter,
-    };
-  },
-  data() {
-    return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      page: 1,
-      maxPage: 5,
-      data: [] as SwapApiData[],
-      isError: false,
-      isLoading: false,
-      errorMessage: "",
+      getData,
+      isError,
+      isLoading,
+      data,
+      errorMessage,
+      maxPage,
     };
   },
   mounted() {
     console.log("mounted");
     this.updatePageFromRouter();
     this.getData(this.page);
-  },
-  methods: {
-    async getData(page: number) {
-      const group = this.$route.params.group as Resources;
-      if (!resources.includes(group)) {
-        this.errorMessage = "Invalid group";
-        this.isError = true;
-        return;
-      }
-      this.isLoading = true;
-      this.isError = false;
-      const res = await SwapiApi.getPeoples(group, page);
-      this.isLoading = false;
-      this.data = [];
-      if (res.status === 200) {
-        this.data.push(...res.data.results);
-        this.maxPage = Math.ceil(res.data.count / 10);
-      } else {
-        this.isError = true;
-        this.isLoading = false;
-        if (res.responce && typeof res.responce === "string")
-          this.errorMessage = res.responce;
-      }
-    },
   },
 });
 </script>

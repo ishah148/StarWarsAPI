@@ -1,12 +1,13 @@
-import { ref, onMounted, getCurrentInstance, onUpdated } from "vue";
+import { ref, onMounted, getCurrentInstance, onUpdated, Ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-function usePagination() {
+function usePagination(maxPage: Ref<number>) {
   const router = useRouter();
   const route = useRoute();
   const instance = getCurrentInstance();
   const page = ref(1);
+  console.log("mp", maxPage);
   function nextPage() {
-    if (page.value < 5) {
+    if (page.value < maxPage.value) {
       page.value++;
       router.push({ query: { page: page.value } });
     }
