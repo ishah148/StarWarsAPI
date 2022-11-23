@@ -21,8 +21,8 @@
   <ErrorSign v-if="isError" :msg="errorMessage" />
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { defineComponent, onMounted } from "vue";
 import SearchBar from "../components/ui/SearchBar.vue";
 import ShortDescriptionItem from "../components/ShortDescriptionItem.vue";
 import PaginationWrapper from "@/components/PaginationWrapper.vue";
@@ -30,37 +30,16 @@ import ErrorSign from "../components/ui/ErrorSign.vue";
 import LoadingSpinner from "../components/ui/LoadingSpinner.vue";
 import usePagination from "@/hooks/usePagination";
 import useFetchStarWarsData from "@/hooks/useFetchStarWarsData";
-export default defineComponent({
-  components: {
-    SearchBar,
-    ShortDescriptionItem,
-    ErrorSign,
-    LoadingSpinner,
-    PaginationWrapper,
-  },
-  setup() {
-    const { data, errorMessage, getData, isError, isLoading, maxPage } =
-      useFetchStarWarsData();
-    const { nextPage, page, prevPage, updatePageFromRouter } =
-      usePagination(maxPage);
-    return {
-      nextPage,
-      page,
-      prevPage,
-      updatePageFromRouter,
-      getData,
-      isError,
-      isLoading,
-      data,
-      errorMessage,
-      maxPage,
-    };
-  },
-  mounted() {
-    console.log("mounted");
-    this.updatePageFromRouter();
-    this.getData(this.page);
-  },
+
+const { data, errorMessage, getData, isError, isLoading, maxPage } =
+  useFetchStarWarsData();
+const { nextPage, page, prevPage, updatePageFromRouter } =
+  usePagination(maxPage);
+
+onMounted(() => {
+  console.log("mounted");
+  updatePageFromRouter();
+  getData(page.value);
 });
 </script>
 
