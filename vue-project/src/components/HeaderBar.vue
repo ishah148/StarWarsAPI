@@ -11,10 +11,10 @@ import BackButton from "./ui/BackButton.vue";
 
 export default defineComponent({
   name: "HeaderMain",
+  components: { BackButton },
   props: {
     msg: String,
   },
-  components: { BackButton },
 });
 </script>
 
